@@ -147,20 +147,16 @@
     /* ── INTRO — curta, é só um pulo entre páginas ──
        0.05s  a palavra PORTFÓLIO aparece centralizada
        0.62s  a palavra cresce e some
-       0.72s  a cortina abre ao meio e revela o hero
-       1.30s  fim
+       0.72s  o fundo desliga e revela o hero
+       1.25s  fim
        ────────────────────────────────────────────── */
-    #intro { position: fixed; inset: 0; z-index: 9500; pointer-events: none; }
-    .intro-half {
-      position: absolute; left: 0; right: 0; z-index: 1;
-      background: var(--bg); will-change: transform;
+    #intro {
+      position: fixed; inset: 0; z-index: 9500; pointer-events: none;
+      background-color: var(--bg);
+      background-image: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(249,115,22,0.10) 0%, transparent 65%);
+      transition: opacity 0.5s ease;
     }
-    .intro-half-top    { top: 0; height: 50%; }
-    .intro-half-bottom { top: 50%; bottom: 0; }
-    #intro.open .intro-half-top    { animation: introUp   0.58s cubic-bezier(0.76,0,0.24,1) forwards; }
-    #intro.open .intro-half-bottom { animation: introDown 0.58s cubic-bezier(0.76,0,0.24,1) forwards; }
-    @keyframes introUp   { to { transform: translateY(-100%); } }
-    @keyframes introDown { to { transform: translateY(100%); } }
+    #intro.out { opacity: 0; }
 
     .intro-word {
       position: absolute; left: 50%; top: 50%; z-index: 3;
@@ -173,19 +169,6 @@
     }
     #intro.word-in  .intro-word { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     #intro.word-out .intro-word { opacity: 0; transform: translate(-50%, -50%) scale(1.22); }
-
-    .intro-seam {
-      position: absolute; top: 50%; left: 0; right: 0; height: 1px; z-index: 4;
-      background: linear-gradient(90deg, transparent 0%, rgba(249,115,22,0.45) 25%, #F97316 50%, rgba(249,115,22,0.45) 75%, transparent 100%);
-      box-shadow: 0 0 24px 5px rgba(249,115,22,0.4);
-      opacity: 0; transform: scaleX(0.15);
-    }
-    #intro.open .intro-seam { animation: introSeam 0.5s cubic-bezier(0.4,0,0.2,1) forwards; }
-    @keyframes introSeam {
-      0%   { opacity: 0; transform: scaleX(0.15); }
-      28%  { opacity: 1; transform: scaleX(1); }
-      100% { opacity: 0; transform: scaleX(1); }
-    }
 
     /* ── ESPINHA ── */
     .spine {
@@ -719,10 +702,7 @@
 
   <!-- ══ INTRO ══ -->
   <div id="intro" aria-hidden="true">
-    <div class="intro-half intro-half-top"></div>
-    <div class="intro-half intro-half-bottom"></div>
     <div class="intro-word">PORTFÓLIO</div>
-    <div class="intro-seam"></div>
   </div>
 
   <div class="spine" aria-hidden="true"><div class="spine-fill"></div></div>
@@ -1388,7 +1368,7 @@
     });
 
     /* ─────────────────────────────────────────────
-       3. INTRO — curta: palavra, depois abre ao meio
+       3. INTRO — curta: palavra, depois o fundo desliga
        ───────────────────────────────────────────── */
     var intro = document.getElementById('intro');
     var spineFill = document.querySelector('.spine-fill');
@@ -1409,11 +1389,11 @@
       setTimeout(function () { intro.classList.add('word-in'); }, 60);
       setTimeout(function () { intro.classList.add('word-out'); }, 620);
       setTimeout(function () {
-        intro.classList.add('open');
+        intro.classList.add('out');
         document.body.classList.add('revealed');
         observeAll();
       }, 720);
-      setTimeout(finishIntro, 1320);
+      setTimeout(finishIntro, 1250);
     }
 
     /* ─────────────────────────────────────────────
