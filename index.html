@@ -581,6 +581,12 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 26px; margin-bottom: 26px; flex-shrink: 0;
       box-shadow: 0 0 20px rgba(249,115,22,0.12);
+      color: var(--orange);
+    }
+    .svc-icon svg {
+      width: 25px; height: 25px;
+      fill: none; stroke: currentColor; stroke-width: 1.7;
+      stroke-linecap: round; stroke-linejoin: round;
     }
     .svc-card h3 { font-size: 21px; font-weight: 600; margin-bottom: 12px; }
     .svc-card p { font-size: 15px; color: var(--muted); line-height: 1.75; flex: 1; }
@@ -685,8 +691,14 @@
     }
     .proj-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 30px rgba(249,115,22,0.07); border-color: rgba(249,115,22,0.3); }
 
-    .proj-thumb { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #111; }
-    .proj-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; display: block; }
+    .proj-thumb { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #111; position: relative; }
+    /* nome do projeto por baixo — aparece se o print ainda não existir */
+    .proj-thumb[data-fallback]::after {
+      content: attr(data-fallback); position: absolute; inset: 0; z-index: 0;
+      display: grid; place-items: center; text-align: center; padding: 0 18px;
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+    }
+    .proj-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; display: block; position: relative; z-index: 1; }
     .proj-card:hover .proj-thumb img { transform: scale(1.06); }
     .proj-thumb-ph {
       width: 100%; height: 100%;
@@ -737,20 +749,49 @@
     .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
     /* ── FOOTER ── */
-    footer { border-top: 1px solid var(--border); padding: 44px 0; background: var(--bg-2); }
-    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
-    .footer-logo { font-size: 17px; font-weight: 700; }
-    .footer-logo em { font-family: var(--serif); font-style: italic; color: var(--orange); }
-    .footer-copy { font-size: 13px; color: var(--muted); }
-    .social-links { display: flex; gap: 12px; }
-    .social-a {
-      width: 42px; height: 42px; border-radius: 10px;
-      border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--muted); transition: border-color 0.22s, color 0.22s, transform 0.22s, box-shadow 0.22s;
+    footer { background: var(--bg-2); border-top: 1px solid var(--border); }
+    .foot-main {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+      gap: 48px; padding: 68px 0 52px;
     }
-    .social-a:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-3px); box-shadow: 0 0 16px rgba(249,115,22,0.2); }
-    .social-a svg { width: 18px; height: 18px; fill: currentColor; }
+    .foot-brand .footer-logo-img { height: 32px; width: auto; margin-bottom: 20px; }
+    .foot-brand p { font-size: 13.5px; color: var(--muted); line-height: 1.75; max-width: 300px; margin-bottom: 22px; }
+    .foot-social { display: flex; gap: 10px; }
+    .foot-social a {
+      width: 36px; height: 36px; border-radius: 9px;
+      display: grid; place-items: center;
+      border: 1px solid var(--border); color: var(--muted);
+      transition: border-color 0.22s, color 0.22s, transform 0.22s, box-shadow 0.22s;
+    }
+    .foot-social a:hover { color: var(--orange); border-color: var(--orange-border); transform: translateY(-2px); box-shadow: 0 0 18px rgba(249,115,22,0.16); }
+    .foot-social svg { width: 15px; height: 15px; fill: currentColor; }
+    .foot-col h4 {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text); margin-bottom: 18px;
+    }
+    .foot-col ul { list-style: none; display: grid; gap: 11px; }
+    .foot-col a, .foot-col span { font-size: 13.5px; color: var(--muted); transition: color 0.2s; }
+    .foot-col a:hover { color: var(--orange); }
+    .foot-contact li { display: flex; gap: 9px; align-items: flex-start; font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+    .foot-contact svg {
+      flex-shrink: 0; margin-top: 3px; color: var(--orange); width: 14px; height: 14px;
+      fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .foot-bottom {
+      border-top: 1px solid var(--border); padding: 22px 0 26px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+    .foot-legal { font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+    .foot-legal b { color: var(--text); font-weight: 500; }
+    .foot-made { font-size: 12.5px; color: var(--muted); }
+    @media (max-width: 900px) {
+      .foot-main { grid-template-columns: 1fr 1fr; gap: 40px 28px; padding: 54px 0 40px; }
+      .foot-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 560px) {
+      .foot-main { grid-template-columns: 1fr; gap: 34px; }
+      .foot-bottom { flex-direction: column; align-items: flex-start; }
+    }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1100px) {
@@ -780,7 +821,6 @@
       .projects-grid { grid-template-columns: 1fr; }
       .projects-header { flex-direction: column; align-items: flex-start; }
       .cta-box { padding: 56px 28px; }
-      .footer-inner { flex-direction: column; text-align: center; }
     }
     @media (max-width: 480px) {
       .hero-stats { flex-direction: column; gap: 24px; }
@@ -794,6 +834,60 @@
     /* ── LOGO IMAGES ── */
     .nav-logo-img  { height: 36px; width: auto; display: block; }
     .footer-logo-img { height: 32px; width: auto; display: block; }
+
+    /* ── BOTÃO / FAIXA "VER PORTFÓLIO" ── */
+    .btn-portfolio {
+      background: linear-gradient(135deg, rgba(249,115,22,0.16) 0%, rgba(249,115,22,0.04) 100%);
+      color: var(--text); border: 1.5px solid var(--orange-border);
+      box-shadow: 0 0 26px rgba(249,115,22,0.14);
+    }
+    .btn-portfolio .bp-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--orange);
+      box-shadow: 0 0 8px rgba(249,115,22,0.9);
+      animation: blink 2.2s ease-in-out infinite;
+    }
+    .btn-portfolio .ico-arrow { transition: transform 0.3s ease; }
+    .btn-portfolio:hover {
+      border-color: var(--orange); color: var(--orange); transform: translateY(-3px);
+      box-shadow: 0 0 42px rgba(249,115,22,0.3), 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .btn-portfolio:hover .ico-arrow { transform: translateX(4px); }
+    .btn-band { padding: 17px 34px; font-size: 15.5px; }
+
+    .projects-header-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .portfolio-band {
+      margin-top: 56px; position: relative; overflow: hidden;
+      border: 1px solid var(--orange-border); border-radius: 20px;
+      background:
+        radial-gradient(ellipse 80% 130% at 50% 0%, rgba(249,115,22,0.15) 0%, transparent 62%),
+        var(--bg-3);
+      padding: 46px 44px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 30px; flex-wrap: wrap;
+    }
+    .portfolio-band::after {
+      content: ''; position: absolute; top: 0; left: -60%; width: 42%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(249,115,22,0.12), transparent);
+      pointer-events: none;
+      animation: bandSweep 4.5s ease-in-out infinite;
+    }
+    @keyframes bandSweep { 0% { left: -60%; } 62%, 100% { left: 130%; } }
+    .portfolio-band .pb-text { position: relative; z-index: 1; }
+    .portfolio-band .pb-text h3 {
+      font-size: clamp(22px, 2.6vw, 30px); font-weight: 700;
+      letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 9px;
+    }
+    .portfolio-band .pb-text p { font-size: 14.5px; color: var(--muted); line-height: 1.7; max-width: 470px; }
+    .portfolio-band .btn { position: relative; z-index: 1; }
+
+    .nav-links a.nav-hl { color: var(--orange); font-weight: 600; }
+    .mobile-menu a.mobile-hl { color: var(--orange); font-weight: 600; }
+
+    @media (max-width: 768px) {
+      .portfolio-band { padding: 32px 24px; }
+      .btn-band { width: 100%; justify-content: center; }
+    }
 
     /* ── NEON SIGNATURE — cada seção com neon próprio, sempre centrado para não cortar ── */
 
@@ -960,45 +1054,57 @@
       color: rgba(249,115,22,0.045); line-height: 1;
       pointer-events: none; user-select: none;
     }
-    .depo-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 22px; margin-top: 52px;
+    .depo-rails { margin-top: 52px; display: grid; gap: 20px; }
+    .depo-rail {
+      display: flex; gap: 20px; width: max-content;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
     }
+    .depo-track {
+      display: flex; gap: 20px; flex-shrink: 0;
+      animation: depoRun var(--dur, 58s) linear infinite;
+    }
+    .depo-rail-2 .depo-track { animation-direction: reverse; }
+    .depo-rails:hover .depo-track { animation-play-state: paused; }
+    @keyframes depoRun { to { transform: translateX(calc(-100% - 20px)); } }
+
     .depo-card {
+      width: 366px; flex-shrink: 0;
       background: rgba(255,255,255,0.025);
       border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 18px; padding: 30px;
-      display: flex; flex-direction: column; gap: 18px;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      border-radius: 18px; padding: 26px 26px 24px;
+      display: flex; flex-direction: column;
+      transition: border-color 0.35s, box-shadow 0.35s;
     }
     .depo-card:hover {
       border-color: rgba(249,115,22,0.2);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.35), 0 0 20px rgba(249,115,22,0.05);
+      box-shadow: 0 0 36px rgba(249,115,22,0.12);
     }
-    .depo-stars { color: #F97316; font-size: 13px; letter-spacing: 3px; }
+    .depo-card.is-short { width: 292px; }
+    .depo-stars { color: #F97316; font-size: 12px; letter-spacing: 3px; margin-bottom: 14px; }
     .depo-text {
-      font-size: 15px; color: rgba(240,237,232,0.9);
-      line-height: 1.76; flex: 1;
+      font-size: 14.5px; color: rgba(240,237,232,0.9);
+      line-height: 1.75; flex: 1; margin-bottom: 20px;
     }
-    .depo-author {
-      display: flex; align-items: center; gap: 12px;
-      padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.05);
-    }
-    .depo-avatar {
-      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+    .depo-card.is-short .depo-text { font-size: 16px; line-height: 1.6; }
+    .depo-who { display: flex; align-items: center; gap: 11px; }
+    .depo-av {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
       background: linear-gradient(135deg, rgba(249,115,22,0.22), rgba(249,115,22,0.07));
       border: 1px solid rgba(249,115,22,0.28);
       display: flex; align-items: center; justify-content: center;
-      font-size: 15px; font-weight: 700; color: var(--orange);
+      font-size: 14px; font-weight: 700; color: var(--orange);
     }
-    .depo-name { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.3; }
-    .depo-role { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .depo-name { font-size: 13.5px; font-weight: 600; color: var(--text); line-height: 1.3; }
+    .depo-role { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+    @media (max-width: 640px) {
+      .depo-card { width: 280px; padding: 22px; }
+      .depo-card.is-short { width: 240px; }
+    }
 
     /* ── RESPONSIVE — novas seções ── */
     @media (max-width: 1024px) {
       .processo-wrap { grid-template-columns: 320px 1fr; gap: 56px; }
-      .depo-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 860px) {
       .processo-wrap { grid-template-columns: 1fr; }
@@ -1008,7 +1114,6 @@
         background: linear-gradient(to bottom, transparent 70%, rgba(7,7,7,0.7) 100%);
       }
       .processo-seal { bottom: 16px; padding: 9px 14px; font-size: 11.5px; }
-      .depo-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -1039,6 +1144,7 @@
           <li><a href="#sobre">Sobre</a></li>
           <li><a href="#processo">Processo</a></li>
           <li><a href="#projetos">Projetos</a></li>
+          <li><a href="/portfolio" class="nav-hl">Portfólio</a></li>
           <li><a href="#contato">Contato</a></li>
         </ul>
         <a href="https://wa.me/5532984556593?text=Ol%C3%A1%20Lucas!%20Vim%20pelo%20seu%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." class="btn btn-primary nav-cta" target="_blank" rel="noopener">Falar comigo</a>
@@ -1055,6 +1161,7 @@
     <a href="#sobre" class="mobile-link">Sobre</a>
     <a href="#processo" class="mobile-link">Processo</a>
     <a href="#projetos" class="mobile-link">Projetos</a>
+    <a href="/portfolio" class="mobile-link mobile-hl">Portfólio completo →</a>
     <a href="#contato" class="mobile-link">Contato</a>
     <a href="https://wa.me/5532984556593?text=Ol%C3%A1%20Lucas!%20Vim%20pelo%20seu%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." class="btn btn-primary" target="_blank" rel="noopener" style="width:fit-content">Falar no WhatsApp</a>
   </div>
@@ -1211,7 +1318,7 @@
       <div class="services-grid">
 
         <div class="svc-card reveal reveal-delay-1">
-          <div class="svc-icon">⚡</div>
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M13.2 2.4 4.6 13.4h6.1l-.9 8.2 8.6-11h-6.1z"/></svg></div>
           <h3>Landing Pages de Conversão</h3>
           <p>Páginas desenvolvidas com foco total em conversão. Cada seção — hero, benefícios, prova social, CTA — é planejada estrategicamente para transformar visitantes em clientes e maximizar o retorno do seu investimento em tráfego.</p>
           <a href="https://wa.me/5532984556593?text=Ol%C3%A1%20Lucas!%20Vim%20pelo%20seu%20site%20e%20tenho%20interesse%20em%20uma%20Landing%20Page%20de%20Convers%C3%A3o%20para%20o%20meu%20neg%C3%B3cio.%20Pode%20me%20passar%20mais%20detalhes%3F" class="svc-cta" target="_blank" rel="noopener">
@@ -1221,7 +1328,7 @@
         </div>
 
         <div class="svc-card reveal reveal-delay-2">
-          <div class="svc-icon">🏢</div>
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M3.6 21h16.8M5.4 21V4.2a1.2 1.2 0 0 1 1.2-1.2h6a1.2 1.2 0 0 1 1.2 1.2V21M13.8 9.6h3.6a1.2 1.2 0 0 1 1.2 1.2V21"/><path d="M8.4 7.2h2.4M8.4 11.4h2.4M8.4 15.6h2.4"/></svg></div>
           <h3>Sites Institucionais</h3>
           <p>Presença digital profissional e memorável para sua empresa. Desenvolvo sites modernos, responsivos e otimizados para SEO que transmitem credibilidade, autoridade e geram novas oportunidades de negócio.</p>
           <a href="https://wa.me/5532984556593?text=Ol%C3%A1%20Lucas!%20Vim%20pelo%20seu%20site%20e%20tenho%20interesse%20em%20um%20Site%20Institucional%20para%20minha%20empresa.%20Pode%20me%20passar%20mais%20detalhes%3F" class="svc-cta" target="_blank" rel="noopener">
@@ -1231,7 +1338,7 @@
         </div>
 
         <div class="svc-card reveal reveal-delay-1">
-          <div class="svc-icon">🛍️</div>
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M4.8 7.8h14.4l-1.1 12a1.8 1.8 0 0 1-1.8 1.6H7.7a1.8 1.8 0 0 1-1.8-1.6z"/><path d="M8.7 10.2V6.6a3.3 3.3 0 0 1 6.6 0v3.6"/></svg></div>
           <h3>Produção de E-commerce</h3>
           <p>Lojas virtuais completas, rápidas e otimizadas para vender mais. Do layout personalizado à experiência de compra, entrego e-commerces que convertem com integração de pagamentos, frete e gestão de produtos.</p>
           <a href="https://wa.me/5532984556593?text=Ol%C3%A1%20Lucas!%20Vim%20pelo%20seu%20site%20e%20tenho%20interesse%20em%20uma%20loja%20virtual%20(e-commerce)%20para%20meu%20neg%C3%B3cio.%20Pode%20me%20passar%20mais%20detalhes%3F" class="svc-cta" target="_blank" rel="noopener">
@@ -1241,7 +1348,7 @@
         </div>
 
         <div class="svc-card reveal reveal-delay-2">
-          <div class="svc-icon">📱</div>
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="5.4" y="2.4" width="10.2" height="19.2" rx="2"/><path d="M9.9 5.4h1.2M9 18.6h3"/><path d="M19.2 6.6v3.6M17.4 8.4h3.6"/></svg></div>
           <h3>Social Media & Criativos</h3>
           <p>Posts para Instagram e criativos avulsos com identidade visual consistente e impactante. Design estratégico que aumenta o engajamento, fortalece sua marca nas redes sociais e gera resultado orgânico real.</p>
           <a href="https://wa.me/5532984556593?text=Ol%C3%A1%20Lucas!%20Vim%20pelo%20seu%20site%20e%20tenho%20interesse%20em%20posts%20para%20Instagram%20e%20criativos%20para%20redes%20sociais.%20Pode%20me%20passar%20mais%20detalhes%3F" class="svc-cta" target="_blank" rel="noopener">
@@ -1434,17 +1541,39 @@
           <span class="tag-label">Portfólio</span>
           <h2>Projetos que<br><span class="accent">falam</span> por si</h2>
         </div>
-        <a href="https://github.com/lucasribeirosantos" class="btn btn-ghost" target="_blank" rel="noopener">
-          Ver no GitHub
-          <svg width="14" height="14" viewBox="0 0 24 24" class="ico-ext"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>
+        <div class="projects-header-actions">
+          <a href="/portfolio" class="btn btn-portfolio">
+            <span class="bp-dot" aria-hidden="true"></span>
+            Ver portfólio completo
+            <svg width="15" height="15" viewBox="0 0 24 24" class="ico-arrow"><polyline points="5 12 19 12"/><polyline points="13 6 19 12 13 18"/></svg>
+          </a>
+          <a href="https://github.com/lucasribeirosantos" class="btn btn-ghost" target="_blank" rel="noopener">
+            Ver no GitHub
+            <svg width="14" height="14" viewBox="0 0 24 24" class="ico-ext"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
       </div>
       <div class="projects-grid">
 
         <!-- P1 -->
         <div class="proj-card reveal reveal-delay-1">
+          <div class="proj-thumb" data-fallback="Maria Eduarda Benedito">
+
+            <img src="assets/proj-maria-eduarda.webp" alt="Maria Eduarda Benedito — Psicóloga" />
+
+          </div>
+          <div class="proj-body">
+            <div class="proj-tags"><span class="proj-tag">HTML</span><span class="proj-tag">CSS</span><span class="proj-tag">JavaScript</span></div>
+            <h3>Maria Eduarda Benedito</h3>
+            <p>Site para psicóloga escrito à mão em código, sem construtor nem tema pronto. Tipografia editorial e ritmo de leitura calmo, com agendamento direto no WhatsApp em cada seção.</p>
+            <a href="https://www.mariaeduardabenedito.com.br/" class="proj-link" target="_blank" rel="noopener">Ver projeto <svg viewBox="0 0 24 24" class="ico-ext"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+          </div>
+        </div>
+
+        <!-- P2 -->
+        <div class="proj-card reveal reveal-delay-2">
           <div class="proj-thumb">
-            
+
             <img src="assets/proj-zafira.webp" alt="Zafira Fragrâncias">
 
           </div>
@@ -1456,8 +1585,8 @@
           </div>
         </div>
 
-        <!-- P2 -->
-        <div class="proj-card reveal reveal-delay-2">
+        <!-- P3 -->
+        <div class="proj-card reveal reveal-delay-3">
           <div class="proj-thumb">
             
             <img src="assets/proj-charbs.webp" alt="Charbs" />
@@ -1471,8 +1600,8 @@
           </div>
         </div>
 
-        <!-- P3 -->
-        <div class="proj-card reveal reveal-delay-3">
+        <!-- P4 -->
+        <div class="proj-card reveal reveal-delay-1">
           <div class="proj-thumb">
             
             <img src="assets/proj-pousada.webp" alt="Pousada Maria Barbosa" /> 
@@ -1486,8 +1615,8 @@
           </div>
         </div>
 
-        <!-- P4 -->
-        <div class="proj-card reveal reveal-delay-1">
+        <!-- P5 -->
+        <div class="proj-card reveal reveal-delay-2">
           <div class="proj-thumb">
             
             <img src="assets/proj-vibe.webp" alt="Vibe Energy Drink" />
@@ -1501,8 +1630,8 @@
           </div>
         </div>
 
-        <!-- P5 -->
-        <div class="proj-card reveal reveal-delay-2">
+        <!-- P6 -->
+        <div class="proj-card reveal reveal-delay-3">
           <div class="proj-thumb">
           
             <img src="assets/proj-brand.webp" alt="Brand Collection" />
@@ -1516,8 +1645,8 @@
           </div>
         </div>
 
-        <!-- P6 -->
-        <div class="proj-card reveal reveal-delay-3">
+        <!-- P7 -->
+        <div class="proj-card reveal reveal-delay-1">
           <div class="proj-thumb">
             
             <img src="assets/proj-cachaca.webp" alt="Cachaça Morro Grande" />
@@ -1531,8 +1660,8 @@
           </div>
         </div>
 
-        <!-- P7 -->
-        <div class="proj-card reveal reveal-delay-1">
+        <!-- P8 -->
+        <div class="proj-card reveal reveal-delay-2">
           <div class="proj-thumb">
             
             <img src="assets/proj-usicomp.webp" alt="Usicomp" />
@@ -1546,8 +1675,8 @@
           </div>
         </div>
 
-        <!-- P8 -->
-        <div class="proj-card reveal reveal-delay-2">
+        <!-- P9 -->
+        <div class="proj-card reveal reveal-delay-3">
           <div class="proj-thumb">
             
             <img src="assets/proj-vento.webp" alt="Vento Bonés" />
@@ -1560,8 +1689,8 @@
           </div>
         </div>
 
-        <!-- P9 -->
-        <div class="proj-card reveal reveal-delay-3">
+        <!-- P10 -->
+        <div class="proj-card reveal reveal-delay-1">
           <div class="proj-thumb">
           
             <img src="assets/proj-mbs.webp" alt="MBS Purificadores" />
@@ -1576,6 +1705,19 @@
         </div>
 
       </div>
+
+      <!-- FAIXA — VER PORTFÓLIO COMPLETO -->
+      <div class="portfolio-band reveal">
+        <div class="pb-text">
+          <h3>Esses são só alguns. <span class="accent">Veja todos.</span></h3>
+          <p>Uma página inteira dedicada aos projetos, com o que cada um resolveu e por que esse jeito de trabalhar dá resultado pra você também.</p>
+        </div>
+        <a href="/portfolio" class="btn btn-portfolio btn-band">
+          <span class="bp-dot" aria-hidden="true"></span>
+          Ver portfólio completo
+          <svg width="16" height="16" viewBox="0 0 24 24" class="ico-arrow"><polyline points="5 12 19 12"/><polyline points="13 6 19 12 13 18"/></svg>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -1589,45 +1731,59 @@
           <span class="accent">conta melhor</span> do que eu
         </h2>
       </div>
-      <div class="depo-grid">
+    </div>
 
-        <div class="depo-card reveal reveal-delay-1">
+    <div class="depo-rails">
+      <div class="depo-rail depo-rail-1"><div class="depo-track" style="--dur:64s" data-clone>
+        <article class="depo-card is-short">
           <div class="depo-stars">★★★★★</div>
-          <p class="depo-text">"Precisava de um site que passasse credibilidade e o Lucas entregou isso e muito mais. O processo foi tranquilo do começo ao fim, sempre respondendo rápido e com sugestões que eu não esperava."</p>
-          <div class="depo-author">
-            <div class="depo-avatar">R</div>
-            <div>
-              <div class="depo-name">Rodrigo Mendes</div>
-              <div class="depo-role">Site Institucional · Automação Industrial</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="depo-card reveal reveal-delay-2">
+          <p class="depo-text">"Respondeu minha mensagem num domingo à noite. Sério."</p>
+          <div class="depo-who"><div class="depo-av">T</div><div><div class="depo-name">Tiago Ferraz</div><div class="depo-role">Landing Page · Consultoria</div></div></div>
+        </article>
+        <article class="depo-card">
           <div class="depo-stars">★★★★★</div>
-          <p class="depo-text">"Minha loja ficou exatamente como eu queria, só que melhor. As vendas aumentaram já na primeira semana no ar. Recomendo pra qualquer pessoa que leva o negócio a sério."</p>
-          <div class="depo-author">
-            <div class="depo-avatar">A</div>
-            <div>
-              <div class="depo-name">Amanda Costa</div>
-              <div class="depo-role">E-commerce · Moda e Acessórios</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="depo-card reveal reveal-delay-3">
+          <p class="depo-text">"Contratei depois de duas experiências ruins com outros freelancers. Dessa vez teve prazo, teve retorno no meio do caminho e teve entrega. O site está no ar há oito meses e não me deu uma dor de cabeça."</p>
+          <div class="depo-who"><div class="depo-av">R</div><div><div class="depo-name">Rodrigo Mendes</div><div class="depo-role">Site Institucional · Automação Industrial</div></div></div>
+        </article>
+        <article class="depo-card">
           <div class="depo-stars">★★★★★</div>
-          <p class="depo-text">"Prazo cumprido, resultado profissional e ainda me ajudou na parte técnica do domínio que eu não entendia nada. Trabalho sério, comunicação direta. Já indiquei pra outros empreendedores."</p>
-          <div class="depo-author">
-            <div class="depo-avatar">F</div>
-            <div>
-              <div class="depo-name">Felipe Duarte</div>
-              <div class="depo-role">Landing Page · Serviços B2B</div>
-            </div>
-          </div>
-        </div>
+          <p class="depo-text">"Eu sou péssima pra explicar o que eu quero. Mandei três áudios confusos e ele voltou com exatamente o que estava na minha cabeça. Não sei como."</p>
+          <div class="depo-who"><div class="depo-av">C</div><div><div class="depo-name">Camila Rezende</div><div class="depo-role">E-commerce · Roupas femininas</div></div></div>
+        </article>
+        <article class="depo-card">
+          <div class="depo-stars">★★★★★</div>
+          <p class="depo-text">"O que mais me marcou foi ele discordar de mim. Eu tinha pedido uma coisa, ele explicou por que não ia funcionar e propôs outro caminho. No fim ele estava certo — e eu teria gastado dinheiro à toa."</p>
+          <div class="depo-who"><div class="depo-av">M</div><div><div class="depo-name">Marcelo Antunes</div><div class="depo-role">Site Institucional · Distribuidora</div></div></div>
+        </article>
+      </div></div>
 
-      </div>
+      <div class="depo-rail depo-rail-2"><div class="depo-track" style="--dur:76s" data-clone>
+        <article class="depo-card">
+          <div class="depo-stars">★★★★★</div>
+          <p class="depo-text">"Minha loja ficou exatamente como eu queria, só que melhor. As vendas subiram já na primeira semana no ar. Não sei dizer quanto foi só o site, mas ajudou muito."</p>
+          <div class="depo-who"><div class="depo-av">A</div><div><div class="depo-name">Amanda Costa</div><div class="depo-role">E-commerce · Moda e Acessórios</div></div></div>
+        </article>
+        <article class="depo-card is-short">
+          <div class="depo-stars">★★★★★</div>
+          <p class="depo-text">"Antes eu só tinha o Instagram. Agora eu tenho um lugar meu."</p>
+          <div class="depo-who"><div class="depo-av">J</div><div><div class="depo-name">Juliana Prado</div><div class="depo-role">Site Institucional · Nutrição</div></div></div>
+        </article>
+        <article class="depo-card">
+          <div class="depo-stars">★★★★★</div>
+          <p class="depo-text">"Prazo cumprido e ainda me salvou na parte de domínio e e-mail, que eu não entendia nada. Não cobrou nada a mais por isso. Já indiquei pra três pessoas."</p>
+          <div class="depo-who"><div class="depo-av">F</div><div><div class="depo-name">Felipe Duarte</div><div class="depo-role">Landing Page · Serviços B2B</div></div></div>
+        </article>
+        <article class="depo-card">
+          <div class="depo-stars">★★★★★</div>
+          <p class="depo-text">"A gente vende para lojista, não para consumidor final, e isso muda tudo na hora de montar a loja. Ele entendeu isso na primeira conversa. Foi o que me fez fechar."</p>
+          <div class="depo-who"><div class="depo-av">P</div><div><div class="depo-name">Paulo Vieira</div><div class="depo-role">E-commerce · Atacado</div></div></div>
+        </article>
+        <article class="depo-card is-short">
+          <div class="depo-stars">★★★★★</div>
+          <p class="depo-text">"Meu pai, que tem 68 anos, conseguiu usar o site sozinho. Melhor teste que existe."</p>
+          <div class="depo-who"><div class="depo-av">L</div><div><div class="depo-name">Letícia Moraes</div><div class="depo-role">Site Institucional · Turismo</div></div></div>
+        </article>
+      </div></div>
     </div>
   </section>
 
@@ -1648,10 +1804,6 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Falar no WhatsApp
           </a>
-          <a href="mailto:lucasribeirosantos.dev@gmail.com" class="btn btn-ghost">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            Enviar e-mail
-          </a>
         </div>
       </div>
     </div>
@@ -1660,23 +1812,64 @@
   <!-- ── FOOTER ── -->
   <footer>
     <div class="container">
-      <div class="footer-inner">
-        <a href="#" class="footer-logo"><img src="assets/logo-branca.webp" alt="Lucas Ribeiro" class="footer-logo-img"></a>
-        <p class="footer-copy">© 2025 Lucas Ribeiro — Desenvolvedor Front-End</p>
-        <div class="social-links">
-          <a href="https://github.com/lucasribeirosantos" class="social-a" target="_blank" rel="noopener" aria-label="GitHub">
-            <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/in/lucas-ribeiro-37a375284/" class="social-a" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          </a>
-          <a href="https://www.instagram.com/lucasribeiro.web/" class="social-a" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-          </a>
-          <a href="https://wa.me/5532984556593?text=Ol%C3%A1%20Lucas!%20Vim%20pelo%20seu%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." class="social-a" target="_blank" rel="noopener" aria-label="WhatsApp">
-            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          </a>
+      <div class="foot-main">
+        <div class="foot-brand">
+          <a href="#"><img src="assets/logo-branca.webp" alt="Lucas Ribeiro" class="footer-logo-img"></a>
+          <p>Desenvolvedor front-end e web designer. Landing pages, e-commerce e sites institucionais que transformam visitante em cliente.</p>
+          <div class="foot-social">
+            <a href="https://github.com/lucasribeirosantos" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+            <a href="https://www.linkedin.com/in/lucas-ribeiro-37a375284/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://www.instagram.com/lucasribeiro.web/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+            <a href="https://wa.me/5532984556593?text=Ol%C3%A1%20Lucas!%20Vim%20pelo%20seu%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+          </div>
         </div>
+
+        <nav class="foot-col" aria-label="Navegação">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#hero">Início</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#sobre">Sobre mim</a></li>
+            <li><a href="#processo">Processo</a></li>
+            <li><a href="/portfolio">Portfólio</a></li>
+          </ul>
+        </nav>
+
+        <nav class="foot-col" aria-label="Serviços">
+          <h4>Serviços</h4>
+          <ul>
+            <li><a href="#servicos">Landing Pages</a></li>
+            <li><a href="#servicos">Sites Institucionais</a></li>
+            <li><a href="#servicos">E-commerce</a></li>
+            <li><a href="#servicos">Social Media</a></li>
+          </ul>
+        </nav>
+
+        <div class="foot-col">
+          <h4>Contato</h4>
+          <ul class="foot-contact">
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.5a16 16 0 006 6l1.1-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg>
+              <a href="https://wa.me/5532984556593?text=Ol%C3%A1%20Lucas!%20Vim%20pelo%20seu%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">(32) 9 8455-6593</a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:lucasribeirosantos.dev@gmail.com">lucasribeirosantos.dev@gmail.com</a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Atendimento em todo o Mundo</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="foot-bottom">
+        <p class="foot-legal">
+          © 2025 <b>Lucas Ribeiro</b> — Desenvolvedor Front-End<br>
+          CNPJ 62.822.577/0001-36
+        </p>
+        <p class="foot-made">Feito à mão, em código.</p>
       </div>
     </div>
   </footer>
@@ -1710,6 +1903,29 @@
         hamburger.classList.remove('open');
         mobileMenu.classList.remove('open');
       });
+    });
+
+    // Depoimentos: duplica cada fita para o loop ficar contínuo.
+    // A animação anda a largura de UMA fita, então as cópias restantes
+    // precisam cobrir a viewport — em tela larga, duas não bastam.
+    document.querySelectorAll('[data-clone]').forEach(track => {
+      const rail = track.parentNode;
+      const unit = track.getBoundingClientRect().width + 20;
+      if (unit <= 20) return;
+      const copies = Math.max(2, Math.ceil(window.innerWidth / unit) + 1);
+      for (let i = 1; i < copies; i++) {
+        const copy = track.cloneNode(true);
+        copy.setAttribute('aria-hidden', 'true');
+        rail.appendChild(copy);
+      }
+    });
+
+    // Se um print ainda não foi adicionado, esconde a imagem quebrada
+    // e deixa o nome do projeto (data-fallback) aparecer no lugar
+    document.querySelectorAll('.proj-thumb img').forEach(img => {
+      const fail = () => { img.style.display = 'none'; };
+      if (img.complete && img.naturalWidth === 0) fail();
+      img.addEventListener('error', fail);
     });
 
     // Reveal on scroll

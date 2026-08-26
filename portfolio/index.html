@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfólio de Lucas Ribeiro — Desenvolvedor Front-End e Web Designer. Landing pages de conversão, e-commerce e sites institucionais que geram resultado real." />
+  <title>Portfólio — Lucas Ribeiro</title>
+
+  <link rel="canonical" href="https://lucasribeirodev.com.br/portfolio" />
+  <meta property="og:title" content="Portfólio — Lucas Ribeiro" />
+  <meta property="og:description" content="30+ projetos entregues. Landing pages, e-commerce e sites institucionais que convertem." />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png" />
+  <link rel="apple-touch-icon" href="../assets/favicon-32x32.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       PORTFÓLIO — mesma identidade da LP, linguagem mais agressiva.
+       Fio condutor: "a linha" — a espinha laranja acompanha o scroll.
+       ═══════════════════════════════════════════════════════════ */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:        #F97316;
+      --orange-2:      #FB923C;
+      --orange-dark:   #e06510;
+      --orange-glow:   rgba(249, 115, 22, 0.12);
+      --orange-border: rgba(249, 115, 22, 0.28);
+      --bg:    #070707;
+      --bg-2:  #0d0d0d;
+      --bg-3:  #151515;
+      --border: rgba(255, 255, 255, 0.07);
+      --text:  #f0ede8;
+      --muted: #747068;
+      --font:  'Space Grotesk', sans-serif;
+      --serif: 'Playfair Display', serif;
+
+      --nav-h:   72px;
+      --spine-x: 34px;
+      --ease:    cubic-bezier(0.19, 1, 0.22, 1);
+      --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    body.intro-lock { overflow: hidden; }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ::selection { background: rgba(249,115,22,0.3); color: #fff; }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(var(--orange), var(--orange-2)); border-radius: 3px; }
+
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .accent { font-family: var(--serif); font-style: italic; color: var(--orange); }
+
+    .tag-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 18px;
+    }
+    .tag-label::before {
+      content: ''; width: 28px; height: 2px;
+      background: linear-gradient(90deg, var(--orange), var(--orange-2));
+      border-radius: 2px;
+    }
+
+    /* ── GRÃO ── */
+    .grain {
+      position: fixed; inset: -50%; z-index: 9000; pointer-events: none;
+      opacity: 0.032; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: grainShift 0.6s steps(3) infinite;
+    }
+    @keyframes grainShift {
+      0%   { transform: translate(0, 0); }
+      33%  { transform: translate(-2%, 1%); }
+      66%  { transform: translate(1%, -2%); }
+      100% { transform: translate(0, 0); }
+    }
+
+    /* ── ÍCONES ── */
+    .ico { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .ico-fill { fill: currentColor; stroke: none; }
+
+    /* ── BOTÕES ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 15px 30px; border-radius: 10px;
+      font-family: var(--font); font-size: 15px; font-weight: 600;
+      cursor: pointer; border: none; position: relative; overflow: hidden;
+      white-space: nowrap;
+      transition: box-shadow 0.25s ease, border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
+      color: #fff;
+      box-shadow: 0 4px 24px rgba(249,115,22,0.4), 0 0 0 1px rgba(249,115,22,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .btn-primary::after {
+      content: ''; position: absolute; top: 0; left: -110%;
+      width: 55%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+      transition: left 0.45s ease;
+    }
+    .btn-primary:hover::after { left: 160%; }
+    .btn-primary:hover { box-shadow: 0 0 50px rgba(249,115,22,0.55), 0 12px 35px rgba(249,115,22,0.35), 0 0 0 1px rgba(249,115,22,0.5); }
+    .btn-ghost { background: transparent; color: var(--text); border: 1.5px solid rgba(255,255,255,0.11); }
+    .btn-ghost:hover { border-color: var(--orange); color: var(--orange); box-shadow: 0 0 22px rgba(249,115,22,0.18); }
+    .btn-wpp {
+      background: linear-gradient(135deg, #25D366, #22c55e); color: #fff;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.32), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .btn-wpp::after {
+      content: ''; position: absolute; top: 0; left: -110%;
+      width: 55%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      transition: left 0.45s ease;
+    }
+    .btn-wpp:hover::after { left: 160%; }
+    .btn-wpp:hover { box-shadow: 0 0 45px rgba(37,211,102,0.5), 0 10px 30px rgba(37,211,102,0.3); }
+    .btn-lg { padding: 18px 38px; font-size: 16px; border-radius: 12px; }
+
+    /* Botão magnético: o deslocamento vive em custom properties para
+       não brigar com o translateY do hover. O JS só escreve --mx/--my. */
+    [data-magnetic] {
+      transform: translate3d(var(--mx, 0px), var(--my, 0px), 0);
+      transition: transform 0.45s var(--ease);
+    }
+    [data-magnetic].mag-live { transition: none; }
+    [data-magnetic]:hover { transform: translate3d(var(--mx, 0px), calc(var(--my, 0px) - 3px), 0); }
+
+    /* ── INTRO — curta, é só um pulo entre páginas ──
+       0.05s  a palavra PORTFÓLIO aparece centralizada
+       0.62s  a palavra cresce e some
+       0.72s  a cortina abre ao meio e revela o hero
+       1.30s  fim
+       ────────────────────────────────────────────── */
+    #intro { position: fixed; inset: 0; z-index: 9500; pointer-events: none; }
+    .intro-half {
+      position: absolute; left: 0; right: 0; z-index: 1;
+      background: var(--bg); will-change: transform;
+    }
+    .intro-half-top    { top: 0; height: 50%; }
+    .intro-half-bottom { top: 50%; bottom: 0; }
+    #intro.open .intro-half-top    { animation: introUp   0.58s cubic-bezier(0.76,0,0.24,1) forwards; }
+    #intro.open .intro-half-bottom { animation: introDown 0.58s cubic-bezier(0.76,0,0.24,1) forwards; }
+    @keyframes introUp   { to { transform: translateY(-100%); } }
+    @keyframes introDown { to { transform: translateY(100%); } }
+
+    .intro-word {
+      position: absolute; left: 50%; top: 50%; z-index: 3;
+      transform: translate(-50%, -50%) scale(0.94);
+      white-space: nowrap; line-height: 1; pointer-events: none; user-select: none;
+      font-size: clamp(52px, 13.5vw, 178px); font-weight: 700; letter-spacing: -0.045em;
+      color: transparent; -webkit-text-stroke: 1.5px rgba(249,115,22,0.62);
+      opacity: 0;
+      transition: opacity 0.42s ease, transform 0.7s var(--ease-io);
+    }
+    #intro.word-in  .intro-word { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    #intro.word-out .intro-word { opacity: 0; transform: translate(-50%, -50%) scale(1.22); }
+
+    .intro-seam {
+      position: absolute; top: 50%; left: 0; right: 0; height: 1px; z-index: 4;
+      background: linear-gradient(90deg, transparent 0%, rgba(249,115,22,0.45) 25%, #F97316 50%, rgba(249,115,22,0.45) 75%, transparent 100%);
+      box-shadow: 0 0 24px 5px rgba(249,115,22,0.4);
+      opacity: 0; transform: scaleX(0.15);
+    }
+    #intro.open .intro-seam { animation: introSeam 0.5s cubic-bezier(0.4,0,0.2,1) forwards; }
+    @keyframes introSeam {
+      0%   { opacity: 0; transform: scaleX(0.15); }
+      28%  { opacity: 1; transform: scaleX(1); }
+      100% { opacity: 0; transform: scaleX(1); }
+    }
+
+    /* ── ESPINHA ── */
+    .spine {
+      position: fixed; left: var(--spine-x); top: 0; z-index: 120;
+      width: 2px; height: 100vh; pointer-events: none;
+      background: rgba(255,255,255,0.06);
+    }
+    .spine-fill {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      transform-origin: top center; transform: scaleY(0);
+      background: linear-gradient(180deg, var(--orange), var(--orange-2));
+      box-shadow: 0 0 14px rgba(249,115,22,0.6);
+    }
+    .spine-node {
+      position: absolute; left: 50%; width: 9px; height: 9px; margin-left: -4.5px;
+      border-radius: 50%; background: var(--bg); border: 2px solid rgba(255,255,255,0.16);
+      transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+    }
+    .spine-node.on {
+      border-color: var(--orange); background: var(--orange);
+      box-shadow: 0 0 12px rgba(249,115,22,0.85); transform: scale(1.15);
+    }
+    @media (max-width: 900px) { .spine { display: none; } }
+
+    /* ── CURSOR ── */
+    .cursor, .cursor-ring {
+      position: fixed; top: 0; left: 0; z-index: 9200;
+      pointer-events: none; border-radius: 50%;
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .cursor { width: 6px; height: 6px; background: var(--orange); box-shadow: 0 0 10px rgba(249,115,22,0.9); }
+    .cursor-ring {
+      width: 34px; height: 34px; border: 1.5px solid rgba(249,115,22,0.45);
+      transition: opacity 0.3s ease, width 0.28s var(--ease), height 0.28s var(--ease), background 0.28s ease, border-color 0.28s ease;
+    }
+    body.cursor-ready .cursor, body.cursor-ready .cursor-ring { opacity: 1; }
+    body.cursor-hot .cursor-ring { width: 58px; height: 58px; background: rgba(249,115,22,0.10); border-color: rgba(249,115,22,0.8); }
+    @media (hover: none), (max-width: 900px) { .cursor, .cursor-ring { display: none; } }
+
+    /* ── NAVBAR ── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: var(--nav-h); display: flex; align-items: center;
+      border-bottom: 1px solid transparent;
+      opacity: 0; transform: translateY(-12px);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    body.revealed #nav {
+      opacity: 1; transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s var(--ease), background 0.3s ease, border-color 0.3s ease;
+    }
+    #nav.scrolled { background: rgba(7,7,7,0.86); backdrop-filter: blur(18px); border-bottom-color: var(--border); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .nav-logo-img { height: 32px; width: auto; }
+    .nav-mid { display: flex; align-items: center; gap: 32px; }
+    .nav-mid a { font-size: 13px; font-weight: 500; color: var(--muted); transition: color 0.2s; position: relative; }
+    .nav-mid a::after {
+      content: ''; position: absolute; left: 0; bottom: -5px; width: 0; height: 1.5px;
+      background: var(--orange); transition: width 0.3s var(--ease);
+    }
+    .nav-mid a:hover { color: var(--text); }
+    .nav-mid a:hover::after { width: 100%; }
+    .nav-cta { padding: 11px 22px; font-size: 13px; }
+    .nav-back { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; color: var(--muted); transition: color 0.2s; }
+    .nav-back:hover { color: var(--orange); }
+    @media (max-width: 900px) { .nav-mid { display: none; } }
+
+    /* ── REVEALS ── */
+    [data-reveal] {
+      opacity: 0;
+      transition: opacity 0.85s var(--ease), transform 0.85s var(--ease);
+      transition-delay: calc(var(--d, 0) * 90ms);
+    }
+    [data-reveal="up"]    { transform: translateY(38px); }
+    [data-reveal="scale"] { transform: scale(0.9); }
+    [data-reveal].in { opacity: 1; transform: none; }
+
+    .word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.09em; }
+    .word-in {
+      display: inline-block; transform: translateY(115%);
+      transition: transform 0.9s var(--ease);
+      transition-delay: calc(var(--i, 0) * 55ms);
+    }
+    .in .word-in { transform: translateY(0); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh; position: relative; display: flex; align-items: center;
+      padding: calc(var(--nav-h) + 60px) 0 100px; overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: 0.03;
+      background-image:
+        linear-gradient(rgba(249,115,22,0.7) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(249,115,22,0.7) 1px, transparent 1px);
+      background-size: 56px 56px;
+      -webkit-mask-image: radial-gradient(ellipse 85% 85% at 50% 45%, black 8%, transparent 78%);
+      mask-image: radial-gradient(ellipse 85% 85% at 50% 45%, black 8%, transparent 78%);
+    }
+    .hero-blob { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(1px); }
+    .hero-blob-1 { width: 640px; height: 640px; top: -140px; right: -120px; background: radial-gradient(circle, rgba(249,115,22,0.13) 0%, transparent 65%); }
+    .hero-blob-2 { width: 420px; height: 420px; bottom: -60px; left: -100px; background: radial-gradient(circle, rgba(249,115,22,0.07) 0%, transparent 70%); }
+    .hero-ghost {
+      position: absolute; left: 50%; top: 50%; z-index: 0;
+      transform: translate(-50%, -50%); white-space: nowrap;
+      font-size: clamp(90px, 21vw, 300px); font-weight: 700; letter-spacing: -0.05em;
+      color: transparent; -webkit-text-stroke: 1px rgba(249,115,22,0.10);
+      pointer-events: none; user-select: none; line-height: 1;
+    }
+    .hero-inner { position: relative; z-index: 2; width: 100%; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.25);
+      border-radius: 100px; padding: 9px 20px;
+      font-size: 13px; font-weight: 500; color: var(--orange); margin-bottom: 30px;
+      box-shadow: 0 0 20px rgba(249,115,22,0.1);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .hero-badge:hover { border-color: var(--orange); box-shadow: 0 0 28px rgba(249,115,22,0.22); }
+    .hero-badge .dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--orange);
+      box-shadow: 0 0 8px rgba(249,115,22,0.8); animation: blink 2.2s ease-in-out infinite; flex-shrink: 0;
+    }
+    @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.35;transform:scale(0.7)} }
+
+    .hero-title {
+      font-size: clamp(40px, 7.4vw, 104px); font-weight: 700;
+      line-height: 1.03; letter-spacing: -0.035em; margin-bottom: 26px;
+    }
+    .hero-lede { font-size: clamp(15px, 1.6vw, 18px); color: var(--muted); max-width: 540px; line-height: 1.75; margin-bottom: 40px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 56px; }
+    .hero-meta { display: flex; gap: 40px; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 28px; }
+    .hero-meta div { font-size: 13px; color: var(--muted); }
+    .hero-meta strong { display: block; font-size: 22px; color: var(--text); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 2px; }
+    .hero-meta strong span { color: var(--orange); }
+
+    .scroll-cue {
+      position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); z-index: 3;
+    }
+    .scroll-cue i { display: block; width: 1px; height: 46px; background: linear-gradient(180deg, var(--orange), transparent); position: relative; overflow: hidden; }
+    .scroll-cue i::after {
+      content: ''; position: absolute; left: 0; top: -100%; width: 100%; height: 100%;
+      background: var(--orange); box-shadow: 0 0 8px rgba(249,115,22,0.9);
+      animation: cueDrop 1.9s var(--ease-io) infinite;
+    }
+    @keyframes cueDrop { 0% { top: -100%; } 60%, 100% { top: 110%; } }
+
+    /* ── MARQUEE ── */
+    .marquee {
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      background: var(--bg-2); overflow: hidden; padding: 22px 0; display: flex;
+    }
+    .marquee-row { display: flex; gap: 46px; padding-right: 46px; flex-shrink: 0; animation: marqueeRun 34s linear infinite; }
+    .marquee:hover .marquee-row { animation-play-state: paused; }
+    @keyframes marqueeRun { to { transform: translateX(-100%); } }
+    .marquee-item {
+      display: inline-flex; align-items: center; gap: 46px;
+      font-size: 15px; font-weight: 600; color: var(--muted);
+      white-space: nowrap; text-transform: uppercase;
+    }
+    .marquee-item::after { content: '◆'; color: var(--orange); font-size: 9px; }
+
+    /* ── NÚMEROS ── */
+    #numeros { padding: 120px 0; background: var(--bg); position: relative; }
+    #numeros h2 { font-size: clamp(28px,4vw,50px); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 56px; }
+    .nums-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); }
+    .num-cell { padding: 42px 28px; border-right: 1px solid var(--border); position: relative; }
+    .num-cell:last-child { border-right: none; }
+    .num-cell::before {
+      content: ''; position: absolute; top: -1px; left: 0; height: 2px; width: 0;
+      background: linear-gradient(90deg, var(--orange), var(--orange-2));
+      box-shadow: 0 0 12px rgba(249,115,22,0.6);
+      transition: width 0.9s var(--ease); transition-delay: calc(var(--d, 0) * 120ms);
+    }
+    .num-cell.in::before { width: 100%; }
+    .num-val { font-size: clamp(42px, 5.6vw, 68px); font-weight: 700; line-height: 1; letter-spacing: -0.04em; margin-bottom: 10px; }
+    .num-val sup { color: var(--orange); font-size: 0.5em; vertical-align: super; text-shadow: 0 0 20px rgba(249,115,22,0.6); }
+    .num-lbl { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    @media (max-width: 860px) {
+      .nums-grid { grid-template-columns: repeat(2, 1fr); }
+      .num-cell:nth-child(2n) { border-right: none; }
+      .num-cell:nth-child(n+3) { border-top: 1px solid var(--border); }
+    }
+
+    /* ── VITRINE — um projeto por vez, em tela cheia ── */
+    #trabalhos { position: relative; background: var(--bg-2); }
+    .show-head { padding: 110px 0 0; position: relative; z-index: 2; }
+    .show-head h2 { font-size: clamp(30px, 4.6vw, 60px); font-weight: 700; line-height: 1.08; letter-spacing: -0.03em; margin-bottom: 18px; }
+    .show-head p { color: var(--muted); max-width: 480px; font-size: 15px; line-height: 1.8; }
+    .show-hint {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 28px;
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange);
+    }
+    .show-hint svg { animation: hintNudge 1.7s var(--ease-io) infinite; }
+    @keyframes hintNudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+    .showcase { position: relative; }
+    .show-sticky {
+      position: sticky; top: 0; overflow: hidden;
+      height: 100vh; height: 100svh;
+      display: flex; align-items: center;
+    }
+    .slide {
+      position: absolute; inset: 0; z-index: 1;
+      display: flex; align-items: center;
+      opacity: 0; visibility: hidden; transform: scale(0.85);
+      transform-origin: center center;
+    }
+    .slide-inner {
+      width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px;
+      display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 52px; align-items: center;
+    }
+
+    .slide-shot {
+      position: relative; border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--border);
+      background: linear-gradient(150deg, var(--bg-3) 0%, var(--bg-2) 100%);
+      box-shadow: 0 46px 100px rgba(0,0,0,0.6), 0 0 70px rgba(249,115,22,0.10);
+    }
+    .slide-chrome { display: flex; align-items: center; gap: 9px; padding: 11px 15px; background: var(--bg-2); border-bottom: 1px solid var(--border); }
+    .slide-dots { display: flex; gap: 5px; }
+    .slide-dots i { width: 8px; height: 8px; border-radius: 50%; display: block; }
+    .slide-dots i:nth-child(1) { background: #ff5f57; }
+    .slide-dots i:nth-child(2) { background: #febc2e; }
+    .slide-dots i:nth-child(3) { background: #28c840; }
+    .slide-url {
+      font-size: 10.5px; color: var(--muted); background: rgba(255,255,255,0.04);
+      border-radius: 5px; padding: 4px 12px; margin-left: 5px;
+      display: inline-flex; align-items: center; gap: 6px; overflow: hidden; text-overflow: ellipsis;
+    }
+    .slide-frame { position: relative; aspect-ratio: 16 / 10.4; overflow: hidden; }
+    .slide-frame::after {
+      content: attr(data-fallback); position: absolute; inset: 0; z-index: 0;
+      display: grid; place-items: center; text-align: center; padding: 0 20px;
+      font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    }
+    .slide-frame img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+    .slide-idx {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.22em; color: var(--orange);
+    }
+    .slide-idx::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--orange-border), transparent); }
+    .slide-body h3 { font-size: clamp(28px, 3.7vw, 48px); font-weight: 700; line-height: 1.05; letter-spacing: -0.035em; margin-bottom: 14px; }
+    .slide-kind {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--text);
+      background: rgba(249,115,22,0.10); border: 1px solid var(--orange-border);
+      border-radius: 6px; padding: 5px 11px; margin-bottom: 18px;
+    }
+    .slide-desc { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 26px; }
+    .slide-wins { list-style: none; display: grid; gap: 12px; margin-bottom: 28px; }
+    .slide-wins li { display: flex; gap: 11px; font-size: 14.5px; line-height: 1.6; color: var(--text); }
+    .slide-wins svg { flex-shrink: 0; margin-top: 3px; color: var(--orange); }
+    .slide-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 28px; }
+    .slide-tag {
+      font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); border-radius: 5px; padding: 5px 10px;
+    }
+    .slide-live {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 600; color: var(--orange);
+      border: 1.5px solid var(--orange-border); border-radius: 10px;
+      padding: 13px 22px; transition: all 0.25s ease;
+    }
+    .slide-live:hover { border-color: var(--orange); background: rgba(249,115,22,0.08); }
+    .slide-live svg { width: 14px; height: 14px; }
+
+    .slide-benefit .slide-inner { grid-template-columns: 1fr; max-width: 880px; text-align: center; }
+    .slide-benefit .sb-icon {
+      width: 76px; height: 76px; border-radius: 20px; margin: 0 auto 26px;
+      display: grid; place-items: center; color: var(--orange);
+      background: rgba(249,115,22,0.10); border: 1px solid var(--orange-border);
+      box-shadow: 0 0 44px rgba(249,115,22,0.24);
+    }
+    .slide-benefit .sb-icon svg { width: 34px; height: 34px; }
+    .slide-benefit .sb-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: var(--orange); margin-bottom: 18px; }
+    .slide-benefit h3 { font-size: clamp(30px, 4.6vw, 58px); font-weight: 700; line-height: 1.08; letter-spacing: -0.035em; margin-bottom: 20px; }
+    .slide-benefit p { font-size: 16.5px; color: var(--muted); line-height: 1.8; max-width: 620px; margin: 0 auto; }
+
+    .show-index { position: absolute; right: 34px; top: 50%; transform: translateY(-50%); z-index: 20; display: flex; flex-direction: column; gap: 9px; }
+    .show-index button {
+      width: 24px; height: 3px; border-radius: 2px; padding: 0; border: none; cursor: pointer;
+      background: rgba(255,255,255,0.14);
+      transition: width 0.35s var(--ease), background 0.35s ease, box-shadow 0.35s ease;
+    }
+    .show-index button:hover { background: rgba(249,115,22,0.5); width: 32px; }
+    .show-index button.on { width: 42px; background: linear-gradient(90deg, var(--orange), var(--orange-2)); box-shadow: 0 0 12px rgba(249,115,22,0.75); }
+    .show-count {
+      position: absolute; z-index: 20; bottom: 40px;
+      left: max(24px, calc((100vw - 1180px) / 2));
+      font-size: 12px; letter-spacing: 0.2em; color: var(--muted);
+    }
+    .show-count b { color: var(--orange); font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-right: 4px; }
+    @media (max-width: 1200px) { .show-index { right: 18px; } }
+
+    /* Vitrine no mobile: mesmo efeito, versão econômica —
+       layout em coluna, sem desfoque, sem índice lateral. */
+    @media (max-width: 1023px) {
+      .slide-inner { grid-template-columns: 1fr; gap: 22px; padding: 0 20px; align-content: center; }
+      .slide-shot { box-shadow: 0 24px 50px rgba(0,0,0,0.55); }
+      .slide-frame { aspect-ratio: 16 / 10; }
+      .slide-idx { margin-bottom: 12px; font-size: 10px; }
+      .slide-body h3 { font-size: clamp(24px, 6.4vw, 34px); margin-bottom: 10px; }
+      .slide-kind { margin-bottom: 14px; font-size: 10px; padding: 4px 9px; }
+      .slide-desc { display: none; }
+      .slide-wins { gap: 8px; margin-bottom: 18px; }
+      .slide-wins li { font-size: 13px; }
+      .slide-wins li:nth-child(n+3) { display: none; }
+      .slide-tags { margin-bottom: 18px; }
+      .slide-live { padding: 11px 18px; font-size: 13px; }
+      .slide-benefit .slide-inner { text-align: center; }
+      .slide-benefit .sb-icon { width: 62px; height: 62px; margin-bottom: 20px; }
+      .slide-benefit .sb-icon svg { width: 28px; height: 28px; }
+      .slide-benefit h3 { font-size: clamp(26px, 7.2vw, 38px); }
+      .slide-benefit p { font-size: 15px; }
+      .show-index { display: none; }
+      .show-count { left: 20px; bottom: 22px; font-size: 11px; }
+      .show-count b { font-size: 19px; }
+    }
+
+    /* ── CARDS EMPILHADOS ── */
+    #porque { padding: 130px 0 0; background: var(--bg); position: relative; }
+    .porque-head h2 { font-size: clamp(30px, 4.6vw, 60px); font-weight: 700; line-height: 1.08; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .porque-head p { color: var(--muted); max-width: 520px; font-size: 15px; line-height: 1.75; margin-bottom: 70px; }
+    .stack { position: relative; padding-bottom: 120px; }
+    .stack-card {
+      position: sticky; top: calc(var(--nav-h) + 40px);
+      background: var(--bg-3); border: 1px solid var(--border); border-radius: 20px;
+      padding: 44px 44px 46px; margin-bottom: 26px;
+      display: grid; grid-template-columns: 76px 1fr auto; gap: 28px; align-items: center;
+      box-shadow: 0 -1px 0 rgba(255,255,255,0.02), 0 24px 60px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+    .stack-card::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 55% 130% at 8% 50%, rgba(249,115,22,0.10) 0%, transparent 60%);
+    }
+    .sc-icon {
+      width: 76px; height: 76px; border-radius: 18px; display: grid; place-items: center;
+      color: var(--orange); background: rgba(249,115,22,0.09);
+      border: 1px solid var(--orange-border); box-shadow: 0 0 30px rgba(249,115,22,0.18);
+      position: relative; z-index: 1;
+    }
+    .sc-icon svg { width: 32px; height: 32px; }
+    .sc-body { position: relative; z-index: 1; }
+    .sc-body h3 { font-size: clamp(20px, 2.3vw, 27px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 9px; }
+    .sc-body p { font-size: 14.5px; color: var(--muted); line-height: 1.75; max-width: 620px; }
+    .sc-num { font-size: 54px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(249,115,22,0.35); position: relative; z-index: 1; }
+    @media (max-width: 860px) {
+      .stack-card { grid-template-columns: 56px 1fr; padding: 28px 24px 30px; gap: 18px; }
+      .sc-icon { width: 56px; height: 56px; border-radius: 15px; }
+      .sc-icon svg { width: 25px; height: 25px; }
+      .sc-num { display: none; }
+    }
+
+    /* ── DEPOIMENTOS — esteira infinita ── */
+    #prova {
+      padding: 120px 0;
+      background: radial-gradient(ellipse 70% 65% at 50% 50%, rgba(249,115,22,0.075) 0%, transparent 55%), var(--bg-2);
+      overflow: hidden;
+    }
+    #prova h2 { font-size: clamp(28px,4vw,50px); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; }
+    .depo-rails { margin-top: 54px; display: grid; gap: 20px; }
+    .depo-rail {
+      display: flex; gap: 20px; width: max-content;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+    }
+    .depo-track { display: flex; gap: 20px; flex-shrink: 0; animation: depoRun var(--dur, 58s) linear infinite; }
+    .depo-rail-2 .depo-track { animation-direction: reverse; }
+    .depo-rails:hover .depo-track { animation-play-state: paused; }
+    @keyframes depoRun { to { transform: translateX(calc(-100% - 20px)); } }
+    .depo-card {
+      width: 366px; flex-shrink: 0;
+      background: var(--bg-3); border: 1px solid var(--border); border-radius: 16px;
+      padding: 26px 26px 24px;
+      display: flex; flex-direction: column;
+      transition: border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    .depo-card:hover { border-color: var(--orange-border); box-shadow: 0 0 36px rgba(249,115,22,0.12); }
+    .depo-card.is-short { width: 292px; }
+    .depo-stars { color: var(--orange); font-size: 12px; letter-spacing: 3px; margin-bottom: 14px; }
+    .depo-text { font-size: 14.5px; line-height: 1.75; color: var(--text); margin-bottom: 20px; flex: 1; }
+    .depo-card.is-short .depo-text { font-size: 16px; line-height: 1.6; }
+    .depo-who { display: flex; align-items: center; gap: 11px; }
+    .depo-av {
+      width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+      font-weight: 700; font-size: 14px; color: #fff; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--orange), var(--orange-2));
+      box-shadow: 0 0 16px rgba(249,115,22,0.32);
+    }
+    .depo-name { font-size: 13.5px; font-weight: 600; }
+    .depo-role { font-size: 11.5px; color: var(--muted); }
+    @media (max-width: 640px) {
+      .depo-card { width: 280px; padding: 22px; }
+      .depo-card.is-short { width: 240px; }
+    }
+
+    /* ── CTA FINAL ── */
+    #contato { padding: 130px 0 140px; background: var(--bg); position: relative; overflow: hidden; }
+    .cta-box {
+      position: relative; border: 1px solid var(--orange-border); border-radius: 26px;
+      padding: 76px 56px; text-align: center; overflow: hidden;
+      background: radial-gradient(ellipse 80% 120% at 50% 0%, rgba(249,115,22,0.15) 0%, transparent 62%), var(--bg-3);
+    }
+    .cta-box::before {
+      content: ''; position: absolute; inset: -2px; z-index: 0; pointer-events: none;
+      background: conic-gradient(from 0deg, transparent 0deg, rgba(249,115,22,0.35) 40deg, transparent 90deg, transparent 360deg);
+      animation: ctaSweep 7s linear infinite;
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; padding: 1px; border-radius: 26px;
+    }
+    @keyframes ctaSweep { to { transform: rotate(360deg); } }
+    .cta-inner { position: relative; z-index: 1; }
+    .cta-box h2 { font-size: clamp(30px, 4.8vw, 60px); font-weight: 700; line-height: 1.08; letter-spacing: -0.03em; margin-bottom: 20px; }
+    .cta-box .cta-lede { font-size: 16px; color: var(--muted); line-height: 1.78; max-width: 520px; margin: 0 auto 38px; }
+    .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 26px; }
+    .cta-fine { font-size: 13px; color: var(--muted); }
+    .cta-fine b { color: var(--text); font-weight: 600; }
+    @media (max-width: 768px) { .cta-box { padding: 54px 24px; } }
+
+    /* ── RODAPÉ ── */
+    footer { background: var(--bg-2); border-top: 1px solid var(--border); }
+    .foot-main {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+      gap: 48px; padding: 68px 0 52px;
+    }
+    .foot-brand .foot-logo-img { height: 32px; width: auto; margin-bottom: 20px; }
+    .foot-brand p { font-size: 13.5px; color: var(--muted); line-height: 1.75; max-width: 300px; margin-bottom: 22px; }
+    .foot-social { display: flex; gap: 10px; }
+    .foot-social a {
+      width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center;
+      border: 1px solid var(--border); color: var(--muted); transition: all 0.25s ease;
+    }
+    .foot-social a:hover { color: var(--orange); border-color: var(--orange-border); transform: translateY(-2px); box-shadow: 0 0 18px rgba(249,115,22,0.16); }
+    .foot-social svg { width: 15px; height: 15px; fill: currentColor; }
+    .foot-col h4 {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text); margin-bottom: 18px;
+    }
+    .foot-col ul { list-style: none; display: grid; gap: 11px; }
+    .foot-col a, .foot-col span { font-size: 13.5px; color: var(--muted); transition: color 0.2s; }
+    .foot-col a:hover { color: var(--orange); }
+    .foot-contact li { display: flex; gap: 9px; align-items: flex-start; font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+    .foot-contact svg { flex-shrink: 0; margin-top: 3px; color: var(--orange); width: 14px; height: 14px; }
+    .foot-bottom {
+      border-top: 1px solid var(--border); padding: 22px 0 26px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+    .foot-legal { font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+    .foot-legal b { color: var(--text); font-weight: 500; }
+    .foot-made { font-size: 12.5px; color: var(--muted); }
+    @media (max-width: 900px) {
+      .foot-main { grid-template-columns: 1fr 1fr; gap: 40px 28px; padding: 54px 0 40px; }
+      .foot-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 560px) {
+      .foot-main { grid-template-columns: 1fr; gap: 34px; }
+      .foot-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ── WHATSAPP FLUTUANTE ── */
+    .wpp-float {
+      position: fixed; right: 22px; bottom: 22px; z-index: 300;
+      width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center;
+      background: linear-gradient(135deg, #25D366, #22c55e); color: #fff;
+      box-shadow: 0 6px 26px rgba(37,211,102,0.42);
+      opacity: 0; transform: translateY(20px) scale(0.85); pointer-events: none;
+      transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), box-shadow 0.3s ease;
+    }
+    .wpp-float.on { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    .wpp-float:hover { box-shadow: 0 8px 34px rgba(37,211,102,0.6); transform: translateY(-3px) scale(1.05); }
+    .wpp-float svg { width: 27px; height: 27px; fill: currentColor; }
+    .wpp-float::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      border: 2px solid rgba(37,211,102,0.55); animation: wppPulse 2.4s var(--ease-io) infinite;
+    }
+    @keyframes wppPulse { 0% { transform: scale(1); opacity: 0.8; } 70%, 100% { transform: scale(1.75); opacity: 0; } }
+
+    /* ── MOBILE: primeira sessão centralizada ── */
+    @media (max-width: 860px) {
+      #hero { padding: calc(var(--nav-h) + 40px) 0 96px; text-align: center; }
+      .hero-inner { display: flex; flex-direction: column; align-items: center; }
+      .hero-title { font-size: clamp(34px, 9.4vw, 54px); }
+      .hero-lede { margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; width: 100%; }
+      .hero-actions .btn { width: 100%; justify-content: center; }
+      .hero-meta { justify-content: center; gap: 28px 34px; width: 100%; }
+      .hero-meta div { text-align: center; }
+      .hero-ghost { font-size: clamp(76px, 30vw, 160px); }
+      .scroll-cue { display: none; }
+      /* espaçamento do texto da sessão "O trabalho" */
+      .show-head { padding: 84px 0 0; }
+      .show-head h2 { margin-bottom: 20px; }
+      .show-head p { font-size: 14.5px; line-height: 1.85; max-width: 100%; }
+      .show-hint { margin-top: 30px; }
+    }
+
+    /* ── MOVIMENTO REDUZIDO ── */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .grain, .scroll-cue i::after, .wpp-float::after, .cta-box::before,
+      .marquee-row, .depo-track, .show-hint svg { animation: none; }
+      [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .word-in { transform: none !important; transition: none !important; }
+      [data-magnetic] { transition: none; }
+      #intro { display: none; }
+      .cursor, .cursor-ring { display: none; }
+      .stack-card { position: static; }
+      .showcase { height: auto !important; }
+      .show-sticky { position: static; height: auto; overflow: visible; display: block; padding: 54px 0 80px; }
+      .slide {
+        position: static; display: block; margin-bottom: 72px;
+        opacity: 1 !important; visibility: visible !important;
+        transform: none !important; filter: none !important;
+      }
+      .slide-desc { display: block; }
+      .slide-wins li:nth-child(n+3) { display: flex; }
+      .show-index, .show-count { display: none; }
+    }
+  </style>
+</head>
+<body class="intro-lock">
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ══ INTRO ══ -->
+  <div id="intro" aria-hidden="true">
+    <div class="intro-half intro-half-top"></div>
+    <div class="intro-half intro-half-bottom"></div>
+    <div class="intro-word">PORTFÓLIO</div>
+    <div class="intro-seam"></div>
+  </div>
+
+  <div class="spine" aria-hidden="true"><div class="spine-fill"></div></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"></div>
+
+  <!-- ══ NAV ══ -->
+  <nav id="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-back" aria-label="Voltar para a página inicial">
+        <svg class="ico" width="14" height="14" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        <img src="../assets/logo-branca.webp" alt="Lucas Ribeiro" class="nav-logo-img">
+      </a>
+      <div class="nav-mid">
+        <a href="#numeros">Números</a>
+        <a href="#trabalhos">Projetos</a>
+        <a href="#porque">Por que eu</a>
+        <a href="#prova">Depoimentos</a>
+      </div>
+      <a href="https://wa.me/5532984556593?text=Ol%C3%A1%20Lucas!%20Vim%20pelo%20seu%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20um%20projeto." class="btn btn-primary nav-cta" target="_blank" rel="noopener" data-magnetic>Pedir orçamento</a>
+    </div>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <section id="hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob-1" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob-2" aria-hidden="true"></div>
+    <div class="hero-ghost" data-parallax="0.12" aria-hidden="true">PORTFÓLIO</div>
+
+    <div class="container hero-inner">
+      <a href="https://wa.me/5532984556593?text=Ol%C3%A1%20Lucas!%20Vim%20pelo%20seu%20portf%C3%B3lio%20e%20quero%20um%20or%C3%A7amento." class="hero-badge" data-reveal="up" style="--d:0" target="_blank" rel="noopener">
+        <span class="dot" aria-hidden="true"></span>
+        Aceitando novos projetos · orçamento em até 24h
+      </a>
+      <h1 class="hero-title" data-split>Sites que não só ficam bonitos. Eles <span class="accent">vendem</span>.</h1>
+      <p class="hero-lede" data-reveal="up" style="--d:3">
+        Mais de 30 projetos entregues entre landing pages, e-commerces e sites institucionais. Aqui estão os que melhor mostram como eu trabalho — e por que dá certo.
+      </p>
+      <div class="hero-actions" data-reveal="up" style="--d:4">
+        <a href="#trabalhos" class="btn btn-primary btn-lg" data-magnetic>
+          <svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Ver os projetos
+        </a>
+        <a href="https://wa.me/5532984556593?text=Ol%C3%A1%20Lucas!%20Vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20um%20or%C3%A7amento." class="btn btn-wpp btn-lg" target="_blank" rel="noopener" data-magnetic>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Orçamento no WhatsApp
+        </a>
+      </div>
+      <div class="hero-meta" data-reveal="up" style="--d:5">
+        <div><strong>30<span>+</span></strong>projetos entregues</div>
+        <div><strong>0</strong>feedbacks negativos</div>
+        <div><strong>4<span>+</span></strong>anos de estrada</div>
+        <div><strong>&lt;24<span>h</span></strong>para responder você</div>
+      </div>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true"><span>Role</span><i></i></div>
+  </section>
+
+  <!-- ══ MARQUEE ══ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-row">
+      <span class="marquee-item">Landing Pages</span><span class="marquee-item">E-commerce</span><span class="marquee-item">Sites Institucionais</span><span class="marquee-item">Nuvemshop</span><span class="marquee-item">WordPress</span><span class="marquee-item">React</span><span class="marquee-item">TypeScript</span><span class="marquee-item">SEO</span><span class="marquee-item">Social Media</span><span class="marquee-item">Figma</span>
+    </div>
+    <div class="marquee-row">
+      <span class="marquee-item">Landing Pages</span><span class="marquee-item">E-commerce</span><span class="marquee-item">Sites Institucionais</span><span class="marquee-item">Nuvemshop</span><span class="marquee-item">WordPress</span><span class="marquee-item">React</span><span class="marquee-item">TypeScript</span><span class="marquee-item">SEO</span><span class="marquee-item">Social Media</span><span class="marquee-item">Figma</span>
+    </div>
+  </div>
+
+  <!-- ══ NÚMEROS ══ -->
+  <section id="numeros" data-node>
+    <div class="container">
+      <span class="tag-label" data-reveal="up">Em números</span>
+      <h2 data-split>Resultado não é promessa. É <span class="accent">histórico</span>.</h2>
+      <div class="nums-grid">
+        <div class="num-cell" data-reveal="up" style="--d:0">
+          <div class="num-val"><span data-count="30">0</span><sup>+</sup></div>
+          <div class="num-lbl">Projetos entregues<br>desde 2021</div>
+        </div>
+        <div class="num-cell" data-reveal="up" style="--d:1">
+          <div class="num-val"><span data-count="100">0</span><sup>%</sup></div>
+          <div class="num-lbl">Dos clientes<br>aprovaram na entrega</div>
+        </div>
+        <div class="num-cell" data-reveal="up" style="--d:2">
+          <div class="num-val"><span data-count="4">0</span><sup>+</sup></div>
+          <div class="num-lbl">Anos de experiência<br>em front-end</div>
+        </div>
+        <div class="num-cell" data-reveal="up" style="--d:3">
+          <div class="num-val"><span data-count="0">0</span></div>
+          <div class="num-lbl">Feedbacks negativos<br>em toda a trajetória</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ VITRINE ══ -->
+  <section id="trabalhos" data-node>
+    <div class="container show-head">
+      <span class="tag-label" data-reveal="up">O trabalho</span>
+      <h2 data-split>Projetos reais, no ar, gerando <span class="accent">resultado</span>.</h2>
+      <p data-reveal="up" style="--d:3">Um de cada vez, em tela cheia, com o que cada projeto resolveu — e, no meio do caminho, por que esse jeito de trabalhar funciona pra você também.</p>
+      <div class="show-hint" data-reveal="up" style="--d:4">
+        <span>Role para o próximo</span>
+        <svg class="ico" width="10" height="18" viewBox="0 0 12 24" stroke-width="2.2"><line x1="6" y1="2" x2="6" y2="18"/><polyline points="1 13 6 18 11 13"/></svg>
+      </div>
+    </div>
+
+    <div class="showcase" id="showcase">
+      <div class="show-sticky">
+
+        <!-- 01 · MARIA EDUARDA BENEDITO -->
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="slide-shot">
+              <div class="slide-chrome"><span class="slide-dots"><i></i><i></i><i></i></span><span class="slide-url"><svg class="ico" width="9" height="9" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>mariaeduardabenedito.com.br</span></div>
+              <div class="slide-frame" data-fallback="Maria Eduarda Benedito"><img src="../assets/proj-maria-eduarda.webp" alt="Maria Eduarda Benedito — Psicóloga" loading="lazy"></div>
+            </div>
+            <div class="slide-body">
+              <div class="slide-idx">Projeto 01</div>
+              <h3>Maria Eduarda Benedito</h3>
+              <span class="slide-kind">Site Institucional · Código puro</span>
+              <p class="slide-desc">Site para psicóloga de abordagem psicanalítica, escrito à mão em HTML, CSS e JavaScript — sem construtor, sem tema pronto. Tipografia editorial e ritmo de leitura calmo para transmitir acolhimento antes de pedir o contato.</p>
+              <ul class="slide-wins">
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Feito 100% em código, sem WordPress nem builder</span></li>
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Agendamento direto no WhatsApp em cada seção</span></li>
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Identidade construída em torno da andorinha</span></li>
+              </ul>
+              <div class="slide-tags"><span class="slide-tag">HTML</span><span class="slide-tag">CSS</span><span class="slide-tag">JavaScript</span><span class="slide-tag">SEO</span></div>
+              <a href="https://www.mariaeduardabenedito.com.br/" class="slide-live" target="_blank" rel="noopener">Ver projeto ao vivo <svg class="ico" viewBox="0 0 24 24" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 02 · ZAFIRA -->
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="slide-shot">
+              <div class="slide-chrome"><span class="slide-dots"><i></i><i></i><i></i></span><span class="slide-url"><svg class="ico" width="9" height="9" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>zafirafragrances.com.br</span></div>
+              <div class="slide-frame" data-fallback="Zafira Fragrâncias"><img src="../assets/proj-zafira.webp" alt="Zafira Fragrâncias" loading="lazy"></div>
+            </div>
+            <div class="slide-body">
+              <div class="slide-idx">Projeto 02</div>
+              <h3>Zafira Fragrâncias</h3>
+              <span class="slide-kind">E-commerce</span>
+              <p class="slide-desc">Loja de perfumaria construída do zero, com layout personalizado e navegação desenhada para transformar visitante em pedido.</p>
+              <ul class="slide-wins">
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Do zero ao ar, com banners exclusivos</span></li>
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Experiência de compra fluida até o checkout</span></li>
+              </ul>
+              <div class="slide-tags"><span class="slide-tag">Nuvemshop</span><span class="slide-tag">CSS</span><span class="slide-tag">E-commerce</span></div>
+              <a href="https://www.zafirafragrances.com.br/" class="slide-live" target="_blank" rel="noopener">Ver projeto ao vivo <svg class="ico" viewBox="0 0 24 24" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 03 · CHARBS -->
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="slide-shot">
+              <div class="slide-chrome"><span class="slide-dots"><i></i><i></i><i></i></span><span class="slide-url"><svg class="ico" width="9" height="9" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>charbsb2b.com.br</span></div>
+              <div class="slide-frame" data-fallback="Charbs"><img src="../assets/proj-charbs.webp" alt="Charbs" loading="lazy"></div>
+            </div>
+            <div class="slide-body">
+              <div class="slide-idx">Projeto 03</div>
+              <h3>Charbs</h3>
+              <span class="slide-kind">Landing Page B2B</span>
+              <p class="slide-desc">Página de conversão para fabricante de ferramentas, com formulário inteligente que qualifica o lead antes de ele chegar no time comercial.</p>
+              <ul class="slide-wins">
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Mais reuniões agendadas, menos contato frio</span></li>
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Estrutura pensada para tráfego pago</span></li>
+              </ul>
+              <div class="slide-tags"><span class="slide-tag">WordPress</span><span class="slide-tag">Elementor</span><span class="slide-tag">SEO</span></div>
+              <a href="https://charbsb2b.com.br/" class="slide-live" target="_blank" rel="noopener">Ver projeto ao vivo <svg class="ico" viewBox="0 0 24 24" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- BENEFÍCIO A -->
+        <article class="slide slide-benefit">
+          <div class="slide-inner">
+            <div>
+              <div class="sb-icon">
+                <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="1.3" class="ico-fill"/><path d="M12 3V1.2M12 22.8V21M3 12H1.2M22.8 12H21"/></svg>
+              </div>
+              <div class="sb-kicker">Por que funciona</div>
+              <h3>Antes de codar,<br>eu entendo o <span class="accent">negócio</span></h3>
+              <p>Fui gerente comercial antes de virar dev. Isso muda tudo: eu não entrego só uma tela bonita, entrego uma estrutura pensada para o seu cliente decidir comprar. Cada seção tem um motivo para existir.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 04 · POUSADA MARIA BARBOSA -->
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="slide-shot">
+              <div class="slide-chrome"><span class="slide-dots"><i></i><i></i><i></i></span><span class="slide-url"><svg class="ico" width="9" height="9" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>pousadamariabarbosa.com.br</span></div>
+              <div class="slide-frame" data-fallback="Pousada Maria Barbosa"><img src="../assets/proj-pousada.webp" alt="Pousada Maria Barbosa" loading="lazy"></div>
+            </div>
+            <div class="slide-body">
+              <div class="slide-idx">Projeto 04</div>
+              <h3>Pousada Maria Barbosa</h3>
+              <span class="slide-kind">Site Institucional</span>
+              <p class="slide-desc">Site completo para transformar visitante em hóspede, com as acomodações em destaque e o caminho mais curto possível até a reserva.</p>
+              <ul class="slide-wins">
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Acesso direto ao WhatsApp em cada seção</span></li>
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Galeria das acomodações como argumento de venda</span></li>
+              </ul>
+              <div class="slide-tags"><span class="slide-tag">WordPress</span><span class="slide-tag">Elementor</span><span class="slide-tag">SEO</span></div>
+              <a href="https://pousadamariabarbosa.com.br/" class="slide-live" target="_blank" rel="noopener">Ver projeto ao vivo <svg class="ico" viewBox="0 0 24 24" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 05 · VIBE ENERGY DRINK -->
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="slide-shot">
+              <div class="slide-chrome"><span class="slide-dots"><i></i><i></i><i></i></span><span class="slide-url"><svg class="ico" width="9" height="9" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>vibeenergydrink.com.br</span></div>
+              <div class="slide-frame" data-fallback="Vibe Energy Drink"><img src="../assets/proj-vibe.webp" alt="Vibe Energy Drink" loading="lazy"></div>
+            </div>
+            <div class="slide-body">
+              <div class="slide-idx">Projeto 05</div>
+              <h3>Vibe Energy Drink</h3>
+              <span class="slide-kind">Site Institucional</span>
+              <p class="slide-desc">Presença digital para marca de energético, com identidade visual forte e navegação fluida do primeiro scroll até o contato comercial.</p>
+              <ul class="slide-wins">
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Formulário integrado gerando contatos prontos</span></li>
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Identidade de marca traduzida para a tela</span></li>
+              </ul>
+              <div class="slide-tags"><span class="slide-tag">WordPress</span><span class="slide-tag">Elementor</span><span class="slide-tag">SEO</span></div>
+              <a href="https://vibeenergydrink.com.br/" class="slide-live" target="_blank" rel="noopener">Ver projeto ao vivo <svg class="ico" viewBox="0 0 24 24" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 06 · ATACADO BRAND COLLECTION -->
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="slide-shot">
+              <div class="slide-chrome"><span class="slide-dots"><i></i><i></i><i></i></span><span class="slide-url"><svg class="ico" width="9" height="9" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>atacadobrandcollection.com</span></div>
+              <div class="slide-frame" data-fallback="Atacado Brand Collection"><img src="../assets/proj-brand.webp" alt="Atacado Brand Collection" loading="lazy"></div>
+            </div>
+            <div class="slide-body">
+              <div class="slide-idx">Projeto 06</div>
+              <h3>Atacado Brand Collection</h3>
+              <span class="slide-kind">E-commerce</span>
+              <p class="slide-desc">Loja de atacado de perfumes com faturamento relevante e estrutura escalável, preparada para suportar alto volume de pedidos sem travar.</p>
+              <ul class="slide-wins">
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Compra no atacado simplificada</span></li>
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Base escalável para crescer sem refazer</span></li>
+              </ul>
+              <div class="slide-tags"><span class="slide-tag">Nuvemshop</span><span class="slide-tag">CSS</span><span class="slide-tag">E-commerce</span></div>
+              <a href="https://www.atacadobrandcollection.com/" class="slide-live" target="_blank" rel="noopener">Ver projeto ao vivo <svg class="ico" viewBox="0 0 24 24" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- BENEFÍCIO B -->
+        <article class="slide slide-benefit">
+          <div class="slide-inner">
+            <div>
+              <div class="sb-icon">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M3.6 18.4a9.4 9.4 0 1116.8 0"/><path d="M12 18.4l4.6-6.6"/><circle cx="12" cy="18.4" r="1.4" class="ico-fill"/><path d="M12 4.6v1.6M5.4 8.4l1.2 1M18.6 8.4l-1.2 1"/></svg>
+              </div>
+              <div class="sb-kicker">Por que funciona</div>
+              <h3>Rápido, no prazo<br>e sem <span class="accent">surpresa</span></h3>
+              <p>Escopo e valor fechados antes de começar. Você vê o projeto andando antes de estar pronto, ajusta no momento certo e recebe na data combinada. Mais de 30 entregas, nenhum feedback negativo.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 07 · CACHAÇA MORRO GRANDE -->
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="slide-shot">
+              <div class="slide-chrome"><span class="slide-dots"><i></i><i></i><i></i></span><span class="slide-url"><svg class="ico" width="9" height="9" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>cachacamorrogrande.com.br</span></div>
+              <div class="slide-frame" data-fallback="Cachaça Morro Grande"><img src="../assets/proj-cachaca.webp" alt="Cachaça Morro Grande" loading="lazy"></div>
+            </div>
+            <div class="slide-body">
+              <div class="slide-idx">Projeto 07</div>
+              <h3>Cachaça Morro Grande</h3>
+              <span class="slide-kind">E-commerce</span>
+              <p class="slide-desc">Primeiro canal digital de um produtor artesanal que não existia online. Loja de varejo com páginas que contam a história do produto e fortalecem a marca.</p>
+              <ul class="slide-wins">
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Do zero à primeira venda online da marca</span></li>
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Narrativa do produto como diferencial</span></li>
+              </ul>
+              <div class="slide-tags"><span class="slide-tag">Nuvemshop</span><span class="slide-tag">CSS</span><span class="slide-tag">E-commerce</span></div>
+              <a href="https://cachacamorrogrande.com.br/" class="slide-live" target="_blank" rel="noopener">Ver projeto ao vivo <svg class="ico" viewBox="0 0 24 24" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 08 · USICOMP -->
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="slide-shot">
+              <div class="slide-chrome"><span class="slide-dots"><i></i><i></i><i></i></span><span class="slide-url"><svg class="ico" width="9" height="9" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>institucional.usicomp.com.br</span></div>
+              <div class="slide-frame" data-fallback="Usicomp"><img src="../assets/proj-usicomp.webp" alt="Usicomp" loading="lazy"></div>
+            </div>
+            <div class="slide-body">
+              <div class="slide-idx">Projeto 08</div>
+              <h3>Usicomp</h3>
+              <span class="slide-kind">Site Institucional</span>
+              <p class="slide-desc">Site para empresa de automação industrial, com formulário específico para o nicho e foco em geração contínua de lead B2B qualificado.</p>
+              <ul class="slide-wins">
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Formulário desenhado para o nicho industrial</span></li>
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Credibilidade técnica para fechar contrato</span></li>
+              </ul>
+              <div class="slide-tags"><span class="slide-tag">WordPress</span><span class="slide-tag">Elementor</span><span class="slide-tag">SEO</span></div>
+              <a href="https://institucional.usicomp.com.br/" class="slide-live" target="_blank" rel="noopener">Ver projeto ao vivo <svg class="ico" viewBox="0 0 24 24" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 09 · VENTO BONÉS -->
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="slide-shot">
+              <div class="slide-chrome"><span class="slide-dots"><i></i><i></i><i></i></span><span class="slide-url"><svg class="ico" width="9" height="9" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>usevento.com.br</span></div>
+              <div class="slide-frame" data-fallback="Vento Bonés"><img src="../assets/proj-vento.webp" alt="Vento Bonés" loading="lazy"></div>
+            </div>
+            <div class="slide-body">
+              <div class="slide-idx">Projeto 09</div>
+              <h3>Vento Bonés</h3>
+              <span class="slide-kind">E-commerce</span>
+              <p class="slide-desc">Reformulação completa de uma loja que já existia, para um visual profissional e uma base escalável de crescimento.</p>
+              <ul class="slide-wins">
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Títulos e descrições reescritos para converter</span></li>
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Reposicionamento visual da marca</span></li>
+              </ul>
+              <div class="slide-tags"><span class="slide-tag">Nuvemshop</span><span class="slide-tag">CSS</span><span class="slide-tag">E-commerce</span></div>
+              <a href="https://usevento.com.br/" class="slide-live" target="_blank" rel="noopener">Ver projeto ao vivo <svg class="ico" viewBox="0 0 24 24" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 10 · MBS PURIFICADORES -->
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="slide-shot">
+              <div class="slide-chrome"><span class="slide-dots"><i></i><i></i><i></i></span><span class="slide-url"><svg class="ico" width="9" height="9" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>mbspurificadores.com.br</span></div>
+              <div class="slide-frame" data-fallback="MBS Purificadores"><img src="../assets/proj-mbs.webp" alt="MBS Purificadores" loading="lazy"></div>
+            </div>
+            <div class="slide-body">
+              <div class="slide-idx">Projeto 10</div>
+              <h3>MBS Purificadores</h3>
+              <span class="slide-kind">Landing Page · Código puro</span>
+              <p class="slide-desc">Landing page de alta conversão escrita em HTML, CSS e JavaScript, com apresentação estratégica de produtos e marcas de referência do mercado.</p>
+              <ul class="slide-wins">
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Qualifica o contato antes do atendimento</span></li>
+                <li><svg class="ico" width="15" height="15" viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Carregamento leve, sem peso de builder</span></li>
+              </ul>
+              <div class="slide-tags"><span class="slide-tag">HTML</span><span class="slide-tag">CSS</span><span class="slide-tag">JavaScript</span></div>
+              <a href="https://mbspurificadores.com.br/" class="slide-live" target="_blank" rel="noopener">Ver projeto ao vivo <svg class="ico" viewBox="0 0 24 24" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <div class="show-count" id="showCount"><b>01</b> / 12</div>
+        <div class="show-index" id="showIndex" aria-label="Navegar entre os projetos">
+          <button type="button" class="on" aria-label="Maria Eduarda Benedito"></button>
+          <button type="button" aria-label="Zafira Fragrâncias"></button>
+          <button type="button" aria-label="Charbs"></button>
+          <button type="button" aria-label="Por que funciona: visão comercial"></button>
+          <button type="button" aria-label="Pousada Maria Barbosa"></button>
+          <button type="button" aria-label="Vibe Energy Drink"></button>
+          <button type="button" aria-label="Atacado Brand Collection"></button>
+          <button type="button" aria-label="Por que funciona: prazo sem surpresa"></button>
+          <button type="button" aria-label="Cachaça Morro Grande"></button>
+          <button type="button" aria-label="Usicomp"></button>
+          <button type="button" aria-label="Vento Bonés"></button>
+          <button type="button" aria-label="MBS Purificadores"></button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ POR QUE ME ESCOLHER ══ -->
+  <section id="porque" data-node>
+    <div class="container">
+      <div class="porque-head">
+        <span class="tag-label" data-reveal="up">Por que me selecionar</span>
+        <h2 data-split>Você não está contratando um site. Está contratando um <span class="accent">resultado</span>.</h2>
+        <p data-reveal="up" style="--d:3">Seis motivos concretos — sem promessa vazia, sem letra miúda.</p>
+      </div>
+
+      <div class="stack" id="stack">
+        <article class="stack-card" data-stack>
+          <div class="sc-icon"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="1.3" class="ico-fill"/><path d="M12 3V1.2M12 22.8V21M3 12H1.2M22.8 12H21"/></svg></div>
+          <div class="sc-body">
+            <h3>Visão comercial, não só técnica</h3>
+            <p>Antes de ser desenvolvedor eu fui gerente comercial. Entendo o que faz um cliente decidir comprar — e construo a página em cima disso, não em cima de tendência de design.</p>
+          </div>
+          <div class="sc-num">01</div>
+        </article>
+
+        <article class="stack-card" data-stack>
+          <div class="sc-icon"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 6.6 12 12 16.2 14.2"/></svg></div>
+          <div class="sc-body">
+            <h3>Prazo combinado é prazo cumprido</h3>
+            <p>Escopo, valor e data definidos antes de começar. Você acompanha o andamento e ajusta no momento certo. Mais de 30 projetos entregues sem um único feedback negativo.</p>
+          </div>
+          <div class="sc-num">02</div>
+        </article>
+
+        <article class="stack-card" data-stack>
+          <div class="sc-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M3.6 18.4a9.4 9.4 0 1116.8 0"/><path d="M12 18.4l4.6-6.6"/><circle cx="12" cy="18.4" r="1.4" class="ico-fill"/></svg></div>
+          <div class="sc-body">
+            <h3>Rápido de carregar, fácil de achar</h3>
+            <p>Site pesado perde venda e perde posição no Google. Entrego páginas otimizadas, com imagens tratadas, código limpo e estrutura de SEO pronta desde o primeiro dia.</p>
+          </div>
+          <div class="sc-num">03</div>
+        </article>
+
+        <article class="stack-card" data-stack>
+          <div class="sc-icon"><svg class="ico" viewBox="0 0 24 24"><rect x="2" y="4.4" width="13.6" height="9.6" rx="1.6"/><path d="M6.2 18.2h5.4M8.8 14v4.2"/><rect x="17.4" y="9.2" width="4.8" height="10.4" rx="1.4"/></svg></div>
+          <div class="sc-body">
+            <h3>Responsivo de verdade</h3>
+            <p>A maior parte dos seus clientes vai entrar pelo celular. Cada projeto é testado em telas grandes, médias e pequenas — não é só "encolher o desktop e torcer".</p>
+          </div>
+          <div class="sc-num">04</div>
+        </article>
+
+        <article class="stack-card" data-stack>
+          <div class="sc-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M12 2.6l7.4 2.7v5.5c0 4.6-3.1 8.5-7.4 10.3-4.3-1.8-7.4-5.7-7.4-10.3V5.3z"/><polyline points="8.9 11.9 11.2 14.2 15.3 10.1"/></svg></div>
+          <div class="sc-body">
+            <h3>Hospedagem e domínio por minha conta</h3>
+            <p>Cuido da configuração técnica de hospedagem e domínio quando necessário, sem custo adicional. Você não precisa entender de DNS para ter o site no ar.</p>
+          </div>
+          <div class="sc-num">05</div>
+        </article>
+
+        <article class="stack-card" data-stack>
+          <div class="sc-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M14.6 13.4a2 2 0 01-2 2H6.4L3.2 17.8V6.4a2 2 0 012-2h7.4a2 2 0 012 2z"/><path d="M8.6 4.6V4a2 2 0 012-2h7.2a2 2 0 012 2v8.4l-2.6-1.9"/></svg></div>
+          <div class="sc-body">
+            <h3>Depois da entrega eu continuo aqui</h3>
+            <p>Entrego tudo funcionando, testado e explicado. E fico disponível para dúvidas depois — porque projeto entregue não é relacionamento encerrado.</p>
+          </div>
+          <div class="sc-num">06</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ DEPOIMENTOS ══ -->
+  <section id="prova" data-node>
+    <div class="container">
+      <span class="tag-label" data-reveal="up">Depoimentos</span>
+      <h2 data-split>Quem já trabalhou comigo <span class="accent">conta melhor</span>.</h2>
+    </div>
+
+    <div class="depo-rails" id="depoRails">
+      <div class="depo-rail depo-rail-1"><div class="depo-track" style="--dur:64s" data-clone>
+        <article class="depo-card is-short">
+          <div class="depo-stars">★★★★★</div>
+          <p class="depo-text">"Respondeu minha mensagem num domingo à noite. Sério."</p>
+          <div class="depo-who"><div class="depo-av">T</div><div><div class="depo-name">Tiago Ferraz</div><div class="depo-role">Landing Page · Consultoria</div></div></div>
+        </article>
+        <article class="depo-card">
+          <div class="depo-stars">★★★★★</div>
+          <p class="depo-text">"Contratei depois de duas experiências ruins com outros freelancers. Dessa vez teve prazo, teve retorno no meio do caminho e teve entrega. O site está no ar há oito meses e não me deu uma dor de cabeça."</p>
+          <div class="depo-who"><div class="depo-av">R</div><div><div class="depo-name">Rodrigo Mendes</div><div class="depo-role">Site Institucional · Automação Industrial</div></div></div>
+        </article>
+        <article class="depo-card">
+          <div class="depo-stars">★★★★★</div>
+          <p class="depo-text">"Eu sou péssima pra explicar o que eu quero. Mandei três áudios confusos e ele voltou com exatamente o que estava na minha cabeça. Não sei como."</p>
+          <div class="depo-who"><div class="depo-av">C</div><div><div class="depo-name">Camila Rezende</div><div class="depo-role">E-commerce · Roupas femininas</div></div></div>
+        </article>
+        <article class="depo-card">
+          <div class="depo-stars">★★★★★</div>
+          <p class="depo-text">"O que mais me marcou foi ele discordar de mim. Eu tinha pedido uma coisa, ele explicou por que não ia funcionar e propôs outro caminho. No fim ele estava certo — e eu teria gastado dinheiro à toa."</p>
+          <div class="depo-who"><div class="depo-av">M</div><div><div class="depo-name">Marcelo Antunes</div><div class="depo-role">Site Institucional · Distribuidora</div></div></div>
+        </article>
+      </div></div>
+
+      <div class="depo-rail depo-rail-2"><div class="depo-track" style="--dur:76s" data-clone>
+        <article class="depo-card">
+          <div class="depo-stars">★★★★★</div>
+          <p class="depo-text">"Minha loja ficou exatamente como eu queria, só que melhor. As vendas subiram já na primeira semana no ar. Não sei dizer quanto foi só o site, mas ajudou muito."</p>
+          <div class="depo-who"><div class="depo-av">A</div><div><div class="depo-name">Amanda Costa</div><div class="depo-role">E-commerce · Moda e Acessórios</div></div></div>
+        </article>
+        <article class="depo-card is-short">
+          <div class="depo-stars">★★★★★</div>
+          <p class="depo-text">"Antes eu só tinha o Instagram. Agora eu tenho um lugar meu."</p>
+          <div class="depo-who"><div class="depo-av">J</div><div><div class="depo-name">Juliana Prado</div><div class="depo-role">Site Institucional · Nutrição</div></div></div>
+        </article>
+        <article class="depo-card">
+          <div class="depo-stars">★★★★★</div>
+          <p class="depo-text">"Prazo cumprido e ainda me salvou na parte de domínio e e-mail, que eu não entendia nada. Não cobrou nada a mais por isso. Já indiquei pra três pessoas."</p>
+          <div class="depo-who"><div class="depo-av">F</div><div><div class="depo-name">Felipe Duarte</div><div class="depo-role">Landing Page · Serviços B2B</div></div></div>
+        </article>
+        <article class="depo-card">
+          <div class="depo-stars">★★★★★</div>
+          <p class="depo-text">"A gente vende para lojista, não para consumidor final, e isso muda tudo na hora de montar a loja. Ele entendeu isso na primeira conversa. Foi o que me fez fechar."</p>
+          <div class="depo-who"><div class="depo-av">P</div><div><div class="depo-name">Paulo Vieira</div><div class="depo-role">E-commerce · Atacado</div></div></div>
+        </article>
+        <article class="depo-card is-short">
+          <div class="depo-stars">★★★★★</div>
+          <p class="depo-text">"Meu pai, que tem 68 anos, conseguiu usar o site sozinho. Melhor teste que existe."</p>
+          <div class="depo-who"><div class="depo-av">L</div><div><div class="depo-name">Letícia Moraes</div><div class="depo-role">Site Institucional · Turismo</div></div></div>
+        </article>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ══ CTA FINAL ══ -->
+  <section id="contato" data-node>
+    <div class="container">
+      <div class="cta-box" data-reveal="scale">
+        <div class="cta-inner">
+          <span class="tag-label" style="justify-content:center;">Vamos tirar do papel</span>
+          <h2 data-split>Me conta sua ideia. Eu volto com uma <span class="accent">proposta</span>.</h2>
+          <p class="cta-lede">Landing page, e-commerce, site institucional ou criativos para redes sociais. Chama no WhatsApp que a gente conversa hoje mesmo.</p>
+          <div class="cta-actions">
+            <a href="https://wa.me/5532984556593?text=Ol%C3%A1%20Lucas!%20Vim%20pelo%20portf%C3%B3lio%20e%20quero%20tirar%20meu%20projeto%20do%20papel." class="btn btn-wpp btn-lg" target="_blank" rel="noopener" data-magnetic>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Falar no WhatsApp
+            </a>
+          </div>
+          <p class="cta-fine">Ou salve direto: <b>(32) 9 8455-6593</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ RODAPÉ ══ -->
+  <footer>
+    <div class="container">
+      <div class="foot-main">
+        <div class="foot-brand">
+          <a href="/"><img src="../assets/logo-branca.webp" alt="Lucas Ribeiro" class="foot-logo-img"></a>
+          <p>Desenvolvedor front-end e web designer. Landing pages, e-commerce e sites institucionais que transformam visitante em cliente.</p>
+          <div class="foot-social">
+            <a href="https://github.com/lucasribeirosantos" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+            <a href="https://www.linkedin.com/in/lucas-ribeiro-37a375284/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://www.instagram.com/lucasribeiro.web/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+            <a href="https://wa.me/5532984556593?text=Ol%C3%A1%20Lucas!%20Vim%20pelo%20seu%20portf%C3%B3lio." target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+          </div>
+        </div>
+
+        <nav class="foot-col" aria-label="Navegação">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="/">Início</a></li>
+            <li><a href="/#servicos">Serviços</a></li>
+            <li><a href="/#sobre">Sobre mim</a></li>
+            <li><a href="/#processo">Processo</a></li>
+            <li><a href="/portfolio">Portfólio</a></li>
+          </ul>
+        </nav>
+
+        <nav class="foot-col" aria-label="Serviços">
+          <h4>Serviços</h4>
+          <ul>
+            <li><a href="/#servicos">Landing Pages</a></li>
+            <li><a href="/#servicos">Sites Institucionais</a></li>
+            <li><a href="/#servicos">E-commerce</a></li>
+            <li><a href="/#servicos">Social Media</a></li>
+          </ul>
+        </nav>
+
+        <div class="foot-col">
+          <h4>Contato</h4>
+          <ul class="foot-contact">
+            <li>
+              <svg class="ico" viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.5a16 16 0 006 6l1.1-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg>
+              <a href="https://wa.me/5532984556593?text=Ol%C3%A1%20Lucas!%20Vim%20pelo%20seu%20portf%C3%B3lio." target="_blank" rel="noopener">(32) 9 8455-6593</a>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 24 24" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:lucasribeirosantos.dev@gmail.com">lucasribeirosantos.dev@gmail.com</a>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 24 24" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Atendimento em todo o Mundo</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="foot-bottom">
+        <p class="foot-legal">
+          © 2025 <b>Lucas Ribeiro</b> — Desenvolvedor Front-End<br>
+          CNPJ 62.822.577/0001-36
+        </p>
+        <p class="foot-made">Feito à mão, em código.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5532984556593?text=Ol%C3%A1%20Lucas!%20Vim%20pelo%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20um%20or%C3%A7amento." class="wpp-float" id="wppFloat" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+  (function () {
+    'use strict';
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var clamp = function (v, a, b) { return Math.min(Math.max(v, a), b); };
+
+    /* ─────────────────────────────────────────────
+       1. TEXTO EM PALAVRAS
+       Percorre os nós filhos em vez de usar textContent,
+       para preservar o <span class="accent"> dos destaques.
+       ───────────────────────────────────────────── */
+    function makeWord(i) {
+      var outer = document.createElement('span');
+      outer.className = 'word';
+      var inner = document.createElement('span');
+      inner.className = 'word-in';
+      inner.style.setProperty('--i', i);
+      outer.appendChild(inner);
+      return outer;
+    }
+
+    document.querySelectorAll('[data-split]').forEach(function (el) {
+      var frag = document.createDocumentFragment();
+      var i = 0;
+      Array.prototype.slice.call(el.childNodes).forEach(function (node) {
+        if (node.nodeType === 3) {
+          node.textContent.split(/\s+/).forEach(function (w) {
+            if (!w) return;
+            var word = makeWord(i++);
+            word.firstChild.textContent = w;
+            frag.appendChild(word);
+            frag.appendChild(document.createTextNode(' '));
+          });
+        } else if (node.nodeName === 'BR') {
+          frag.appendChild(node.cloneNode());
+        } else {
+          // um <span class="accent"> inteiro entra como uma única "palavra"
+          var word = makeWord(i++);
+          word.firstChild.appendChild(node.cloneNode(true));
+          frag.appendChild(word);
+          frag.appendChild(document.createTextNode(' '));
+        }
+      });
+      el.innerHTML = '';
+      el.appendChild(frag);
+      el.setAttribute('data-reveal-words', '');
+    });
+
+    /* ─────────────────────────────────────────────
+       2. DEPOIMENTOS — duplica a fita para o loop
+       ───────────────────────────────────────────── */
+    // A animação anda a largura de UMA fita. Para o loop não abrir buraco,
+    // as cópias restantes precisam cobrir a viewport — em tela larga, duas
+    // cópias não bastam, então o número é calculado a partir da largura real.
+    document.querySelectorAll('[data-clone]').forEach(function (track) {
+      var rail = track.parentNode;
+      var unit = track.getBoundingClientRect().width + 20;
+      if (unit <= 20) return;
+      var copies = Math.max(2, Math.ceil(window.innerWidth / unit) + 1);
+      for (var i = 1; i < copies; i++) {
+        var copy = track.cloneNode(true);
+        copy.setAttribute('aria-hidden', 'true');
+        rail.appendChild(copy);
+      }
+    });
+
+    /* ─────────────────────────────────────────────
+       3. INTRO — curta: palavra, depois abre ao meio
+       ───────────────────────────────────────────── */
+    var intro = document.getElementById('intro');
+    var spineFill = document.querySelector('.spine-fill');
+
+    function finishIntro() {
+      document.body.classList.remove('intro-lock');
+      if (intro && intro.parentNode) intro.remove();
+      measureShow();
+      onScroll();
+    }
+
+    if (reduce || !intro) {
+      document.body.classList.remove('intro-lock');
+      document.body.classList.add('revealed');
+      if (intro) intro.remove();
+      observeAll();
+    } else {
+      setTimeout(function () { intro.classList.add('word-in'); }, 60);
+      setTimeout(function () { intro.classList.add('word-out'); }, 620);
+      setTimeout(function () {
+        intro.classList.add('open');
+        document.body.classList.add('revealed');
+        observeAll();
+      }, 720);
+      setTimeout(finishIntro, 1320);
+    }
+
+    /* ─────────────────────────────────────────────
+       4. REVEALS + CONTADORES
+       ───────────────────────────────────────────── */
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        e.target.querySelectorAll('[data-count]').forEach(runCount);
+        if (e.target.hasAttribute('data-count')) runCount(e.target);
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+    function observeAll() {
+      document.querySelectorAll('[data-reveal], [data-reveal-words], [data-count]').forEach(function (el) {
+        io.observe(el);
+      });
+    }
+
+    function runCount(el) {
+      if (el.dataset.done) return;
+      el.dataset.done = '1';
+      var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+      if (reduce || target === 0) { el.textContent = target; return; }
+      var dur = 1500, t0 = performance.now();
+      (function step(now) {
+        var p = clamp((now - t0) / dur, 0, 1);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(step);
+      })(performance.now());
+    }
+
+    /* ─────────────────────────────────────────────
+       5. VITRINE — um projeto por vez, em tela cheia
+       Funciona também no mobile; lá o desfoque é
+       desligado porque é o filtro mais caro de todos.
+       ───────────────────────────────────────────── */
+    var showcase = document.getElementById('showcase');
+    var showSticky = showcase ? showcase.querySelector('.show-sticky') : null;
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var idxBtns = Array.prototype.slice.call(document.querySelectorAll('#showIndex button'));
+    var showCount = document.getElementById('showCount');
+    var perSlide = 0, showActive = -1, lightMode = false;
+
+    function measureShow() {
+      if (!showcase || !slides.length) return;
+      if (reduce) {
+        showcase.style.height = '';
+        perSlide = 0;
+        slides.forEach(function (s) { s.style.cssText = ''; s.dataset.off = ''; });
+        return;
+      }
+      lightMode = window.innerWidth < 1024;
+      // um pouco mais de rolagem por projeto: cada um segura mais tempo em tela
+      var stickyH = showSticky ? showSticky.offsetHeight : window.innerHeight;
+      perSlide = Math.round(stickyH * (lightMode ? 0.92 : 1.05));
+      showcase.style.height = (perSlide * (slides.length - 1) + stickyH) + 'px';
+    }
+
+    function updateShow() {
+      if (!showcase || perSlide <= 0) return;
+      var raw = -showcase.getBoundingClientRect().top / perSlide;
+
+      for (var i = 0; i < slides.length; i++) {
+        var sl = slides[i];
+        var t = raw - i;
+        var a = Math.abs(t);
+
+        if (a >= 1.04) {
+          if (sl.dataset.off !== '1') {
+            sl.style.visibility = 'hidden';
+            sl.style.opacity = '0';
+            sl.style.pointerEvents = 'none';
+            sl.dataset.off = '1';
+          }
+          continue;
+        }
+        sl.dataset.off = '0';
+
+        // Opacidade sequencial de propósito: se os dois cruzassem em
+        // opacidade alta, dois projetos apareceriam sobrepostos em tela
+        // cheia. Assim o que sai vira um fantasma atrás do que entra.
+        var scale, blur, op;
+        if (t < 0) {
+          var p = clamp((t + 1) / 0.62, 0, 1);
+          scale = 0.85 + 0.15 * p;
+          blur = 0;
+          op = clamp((t + 1 - 0.18) / 0.5, 0, 1);
+        } else {
+          var q = clamp(t / 0.62, 0, 1);
+          scale = 1 + 0.16 * q;
+          blur = lightMode ? 0 : 7 * q;
+          op = 1 - clamp(t / 0.55, 0, 1);
+        }
+
+        sl.style.visibility = 'visible';
+        sl.style.opacity = op.toFixed(3);
+        sl.style.transform = 'scale(' + scale.toFixed(4) + ')';
+        sl.style.filter = blur > 0.2 ? 'blur(' + blur.toFixed(1) + 'px)' : '';
+        sl.style.zIndex = Math.round(100 - a * 40);
+        sl.style.pointerEvents = op > 0.85 ? 'auto' : 'none';
+      }
+
+      var active = clamp(Math.round(raw), 0, slides.length - 1);
+      if (active !== showActive) {
+        showActive = active;
+        for (var j = 0; j < idxBtns.length; j++) idxBtns[j].classList.toggle('on', j === active);
+        if (showCount) {
+          showCount.innerHTML = '<b>' + ('0' + (active + 1)).slice(-2) + '</b> / ' +
+                                ('0' + slides.length).slice(-2);
+        }
+      }
+    }
+
+    // se um print ainda não existe, esconde a <img> e deixa o nome aparecer
+    document.querySelectorAll('.slide-frame img').forEach(function (img) {
+      var fail = function () { img.style.display = 'none'; };
+      if (img.complete && img.naturalWidth === 0) fail();
+      img.addEventListener('error', fail);
+    });
+
+    idxBtns.forEach(function (b, i) {
+      b.addEventListener('click', function () {
+        if (perSlide <= 0) return;
+        var top = showcase.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: top + perSlide * i, behavior: 'smooth' });
+      });
+    });
+
+    /* ─────────────────────────────────────────────
+       6. CARDS EMPILHADOS
+       ───────────────────────────────────────────── */
+    var stackCards = Array.prototype.slice.call(document.querySelectorAll('[data-stack]'));
+
+    function updateStack() {
+      if (reduce || !stackCards.length) return;
+      for (var i = 0; i < stackCards.length - 1; i++) {
+        var cur = stackCards[i];
+        var gap = stackCards[i + 1].getBoundingClientRect().top - cur.getBoundingClientRect().top;
+        var d = clamp(1 - (gap / (cur.offsetHeight + 26)), 0, 1);
+        cur.style.transform = 'scale(' + (1 - d * 0.07).toFixed(4) + ') translateY(' + (-d * 12).toFixed(2) + 'px)';
+        cur.style.opacity = (1 - d * 0.45).toFixed(3);
+      }
+      var last = stackCards[stackCards.length - 1];
+      last.style.transform = '';
+      last.style.opacity = '';
+    }
+
+    /* ─────────────────────────────────────────────
+       7. PARALAXE, ESPINHA, NAV, WHATSAPP
+       ───────────────────────────────────────────── */
+    var parallaxEls = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
+    var nav = document.getElementById('nav');
+    var wpp = document.getElementById('wppFloat');
+
+    function updateMisc() {
+      var y = window.scrollY;
+      var docH = document.documentElement.scrollHeight - window.innerHeight;
+      var prog = docH > 0 ? clamp(y / docH, 0, 1) : 0;
+
+      if (spineFill) spineFill.style.transform = 'scaleY(' + prog.toFixed(4) + ')';
+      if (nav) nav.classList.toggle('scrolled', y > 30);
+      if (wpp) wpp.classList.toggle('on', y > window.innerHeight * 0.7);
+
+      if (!reduce) {
+        parallaxEls.forEach(function (el) {
+          var rate = parseFloat(el.getAttribute('data-parallax')) || 0.1;
+          var rect = el.getBoundingClientRect();
+          var off = (rect.top + rect.height / 2 - window.innerHeight / 2) * rate;
+          el.style.transform = 'translate(-50%, -50%) translateY(' + (-off).toFixed(1) + 'px)';
+        });
+      }
+    }
+
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        updateMisc();
+        updateShow();
+        updateStack();
+        ticking = false;
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function () { measureShow(); onScroll(); });
+    window.addEventListener('load', function () { measureShow(); onScroll(); });
+    measureShow();
+    onScroll();
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { measureShow(); onScroll(); });
+    }
+
+    /* ─────────────────────────────────────────────
+       8. CURSOR + BOTÕES MAGNÉTICOS
+       O deslocamento é limitado e interpolado, senão
+       o botão dispara para longe perto das bordas.
+       ───────────────────────────────────────────── */
+    var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (fine && !reduce) {
+      var dot = document.querySelector('.cursor');
+      var ring = document.querySelector('.cursor-ring');
+      var mx = 0, my = 0, rx = 0, ry = 0, rafCursor = null;
+
+      window.addEventListener('mousemove', function (e) {
+        mx = e.clientX; my = e.clientY;
+        document.body.classList.add('cursor-ready');
+        if (dot) dot.style.transform = 'translate(' + (mx - 3) + 'px,' + (my - 3) + 'px)';
+        if (!rafCursor) rafCursor = requestAnimationFrame(followRing);
+      }, { passive: true });
+
+      function followRing() {
+        rx += (mx - rx) * 0.16;
+        ry += (my - ry) * 0.16;
+        if (ring) ring.style.transform = 'translate(' + (rx - 17) + 'px,' + (ry - 17) + 'px)';
+        if (Math.abs(mx - rx) > 0.4 || Math.abs(my - ry) > 0.4) rafCursor = requestAnimationFrame(followRing);
+        else rafCursor = null;
+      }
+
+      document.querySelectorAll('a, button').forEach(function (el) {
+        el.addEventListener('mouseenter', function () { document.body.classList.add('cursor-hot'); });
+        el.addEventListener('mouseleave', function () { document.body.classList.remove('cursor-hot'); });
+      });
+
+      var MAX_X = 9, MAX_Y = 6;
+      document.querySelectorAll('[data-magnetic]').forEach(function (el) {
+        var tx = 0, ty = 0, cx = 0, cy = 0, raf = null, inside = false;
+
+        function tick() {
+          cx += (tx - cx) * 0.18;
+          cy += (ty - cy) * 0.18;
+          el.style.setProperty('--mx', cx.toFixed(2) + 'px');
+          el.style.setProperty('--my', cy.toFixed(2) + 'px');
+          if (Math.abs(tx - cx) > 0.1 || Math.abs(ty - cy) > 0.1) {
+            raf = requestAnimationFrame(tick);
+          } else {
+            raf = null;
+            if (!inside) el.classList.remove('mag-live');
+          }
+        }
+
+        el.addEventListener('mouseenter', function () { inside = true; el.classList.add('mag-live'); });
+        el.addEventListener('mousemove', function (e) {
+          var r = el.getBoundingClientRect();
+          // normaliza para -1..1 e limita: o botão nunca escapa da própria caixa
+          var nx = clamp((e.clientX - (r.left + r.width / 2)) / (r.width / 2), -1, 1);
+          var ny = clamp((e.clientY - (r.top + r.height / 2)) / (r.height / 2), -1, 1);
+          tx = nx * MAX_X;
+          ty = ny * MAX_Y;
+          if (!raf) raf = requestAnimationFrame(tick);
+        });
+        el.addEventListener('mouseleave', function () {
+          inside = false; tx = 0; ty = 0;
+          if (!raf) raf = requestAnimationFrame(tick);
+        });
+      });
+    }
+
+    /* ─────────────────────────────────────────────
+       9. NÓS DA ESPINHA
+       ───────────────────────────────────────────── */
+    var spine = document.querySelector('.spine');
+    var sections = Array.prototype.slice.call(document.querySelectorAll('[data-node]'));
+    if (spine && sections.length && window.innerWidth > 900) {
+      var nodes = sections.map(function () {
+        var n = document.createElement('span');
+        n.className = 'spine-node';
+        spine.appendChild(n);
+        return n;
+      });
+      var placeNodes = function () {
+        var docH = document.documentElement.scrollHeight - window.innerHeight;
+        sections.forEach(function (s, i) {
+          var top = s.getBoundingClientRect().top + window.scrollY;
+          var p = docH > 0 ? clamp(top / docH, 0, 1) : 0;
+          nodes[i].style.top = 'calc(' + (p * 100).toFixed(2) + 'vh - 4.5px)';
+        });
+      };
+      placeNodes();
+      window.addEventListener('resize', placeNodes);
+      window.addEventListener('load', placeNodes);
+
+      var nodeIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var i = sections.indexOf(e.target);
+          if (i > -1) nodes[i].classList.toggle('on', e.isIntersecting);
+        });
+      }, { threshold: 0.25 });
+      sections.forEach(function (s) { nodeIO.observe(s); });
+    }
+
+  })();
+  </script>
+
+</body>
+</html>
